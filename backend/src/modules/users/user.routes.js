@@ -6,8 +6,12 @@ const UserController = require('./user.controller'); // Importar o controlador l
 module.exports = async (fastify) => {
     // rota buscar os users
     fastify.get('/', UserController.getAll);
-    // rotas para criar novo user
+    // rota para criar novo user
     fastify.post('/new', UserController.create);
-    // rotas para deletar um user
+    // rota para deletar um user
     fastify.delete('/remover/:id', UserController.deleteOne);
+    // rota para encontrar um usuario
+    fastify.get('/pesquisar/:id', UserController.findOneUser );
+    // 
+    fastify.put('/atualizar/:id', UserController.updateOneUser);
 }

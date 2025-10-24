@@ -1,16 +1,14 @@
+// Import types
 import type { ChangeEvent, FormEvent } from "react";
+import type {UserFormType} from "../../../../types/user/UserTypes";
 
+// Hooks
 import { useState } from "react";
 
+// Services
 import MainAPI from "../../../../services/apis/MainAPI";
 
-type Form = { 
-    name: { first: string, last: string },
-    email: string,
-    telefone: { primary: string, secound: string },
-    password: string
-}
-
+// Initiall form datas
 const initialFormData = {
     name: { first: '', last: '' },
     email: '',
@@ -19,9 +17,9 @@ const initialFormData = {
 }
 
 const RegisterUserPage = () => {
-    const [formData, setFormData] = useState<Form>(initialFormData);
+    const [formData, setFormData] = useState<UserFormType>(initialFormData);  //Form state
 
-
+    // Form submit Function
     const formSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -39,31 +37,31 @@ const RegisterUserPage = () => {
         }
     }
 
-    // 
+    // First name function on change
     const handleFirstNameChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData(
             { ...formData, name: { first: e.target.value, last: formData.name.last } }
         )
     }
 
-    // 
+    // Last name function on change
     const handleLastNameChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData(
             { ...formData, name: { first: formData.name.first, last: e.target.value } }
         )
     }
 
-    // 
+    // Email function on change
     const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, email: e.target.value })
     }
 
-    // 
+    // Phone number function on change
     const handleTelephoneChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, telefone: { primary: e.target.value, secound: '' } })
     }
 
-    // 
+    // Password function on change
     const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, password: e.target.value});
     }

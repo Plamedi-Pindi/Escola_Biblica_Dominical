@@ -8,6 +8,7 @@
 
 const User = require('../models/user.model');  // Importa o modelo do usario
 
+
 // Métodos para obter todos os usarios 
 exports.getAll = async () => {
     return await User.find();
@@ -24,6 +25,28 @@ exports.deleteOne = async (id) => {
     const result = await User.deleteOne({ _id: id });
 
     if (!result || result.deletedCount === 0) {
+        throw new Error('Usuário não encontrado ou já removido.');
+    }
+
+    return result;
+}
+
+// Metodo para pesquisar um usario
+exports.getOneUser = async (id) => {
+    const result = await User.findById(id);
+
+    if (!result) {
+        throw new Error('Usuário não encontrado ou já removido.');
+    }
+
+    return result;
+}
+
+// Método para Atualizar dados de um usuário
+exports.updateOneUser = async (id, data) => {
+    const result = await User.findByIdAndUpdate(id, data)
+
+    if (!result) {
         throw new Error('Usuário não encontrado ou já removido.');
     }
 
