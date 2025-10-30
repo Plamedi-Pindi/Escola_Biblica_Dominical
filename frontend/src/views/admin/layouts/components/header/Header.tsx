@@ -10,6 +10,7 @@ import Avatar from "@mui/material/Avatar"
 import Tooltip from "@mui/material/Tooltip"
 import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
+import Drawer from "@mui/material/Drawer"
 
 // 
 import MenuIcon from "@mui/icons-material/Menu"
@@ -19,17 +20,26 @@ import { useState } from "react"
 
 // Components
 import CustomDiv from "../../../../../components/Div/CustomDiv"
+import Sidebar from "../sidebar/MobileSidebar"
 
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header = () => {
-    const [anchorElUser, setAnchorElUser] = useState<HTMLElement | null>(null)
+    const [anchorElUser, setAnchorElUser] = useState<HTMLElement | null>(null) //
+    const [openSidbar, setOpenSidebar] = useState(false); // 
 
+    // 
+    const toggleSidebar = (newOpen: boolean) => {
+        setOpenSidebar(newOpen);
+    }
+
+    // 
     const handleOpenUserMenu = (e: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(e.currentTarget);
     };
 
+    // 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
@@ -40,7 +50,7 @@ const Header = () => {
                 <Toolbar>
                     {/* Menu Icon */}
                     <IconButton
-                        size="large"
+                        size="medium"
                         edge="start"
                         color="info"
                         aria-label="menu"
@@ -50,8 +60,9 @@ const Header = () => {
                                 md: 'none'
                             }
                         }}
+                        onClick={() => toggleSidebar(true)}
                     >
-                        <CustomDiv padding={'p-1'} rounded={'rounded-xl'}>
+                        <CustomDiv padding={'p-1'} rounded={'rounded-xl'}  >
                             <MenuIcon className="!w-5 !h-5 " />
                         </CustomDiv>
                     </IconButton>
@@ -94,8 +105,9 @@ const Header = () => {
                                 </Badge>
                             </CustomDiv>
                         </IconButton>
-
                     </Box>
+
+                    {/* Avatar */}
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open sittings">
                             <IconButton
@@ -109,6 +121,8 @@ const Header = () => {
                             </IconButton>
                         </Tooltip>
                     </Box>
+
+                    {/* Menu */}
                     <Menu
                         sx={{ mt: '45px' }}
                         id="menu-appbar"
@@ -131,10 +145,13 @@ const Header = () => {
                             </MenuItem>
                         ))}
                     </Menu>
-
-
                 </Toolbar>
             </AppBar>
+
+            {/* Sidebar Section */}
+            <Drawer open={openSidbar} onClose={() => toggleSidebar(false)}>
+                <Sidebar  />
+            </Drawer>
         </header>
     )
 }
