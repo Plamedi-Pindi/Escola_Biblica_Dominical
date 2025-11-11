@@ -18,6 +18,7 @@ import MainAPI from "../../../../services/apis/MainAPI";
 type UpdateUserProps = {
     closeDialog: () => void
     data: {
+        _id?: String,
         name: {
             first: string,
             last: string
