@@ -150,7 +150,7 @@ const Header = () => {
 
             {/* Sidebar Section */}
             <Drawer open={openSidbar} onClose={() => toggleSidebar(false)}>
-                <Sidebar  />
+                <Sidebar closeSidebar={()=> toggleSidebar(false)}  />
             </Drawer>
         </header>
     )

@@ -17,69 +17,246 @@ import Collapse from "@mui/material/Collapse"
 import GridView from '@mui/icons-material/GridView'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
+import CloseIcon from '@mui/icons-material/Close';
+import SupervisorIcon from '@mui/icons-material/SupervisorAccountOutlined';
+import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
+import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
+import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
+import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
 
 import { useState, type MouseEventHandler } from "react"
 
 
 type SidebarProps = {
-    onClick?: MouseEventHandler
+    onClick?: MouseEventHandler,
+    closeSidebar: MouseEventHandler
 }
 
-const MobileSidebar = ({ onClick }: SidebarProps) => {
+const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
+    /** ################## STATES #################################### **/
     const [openSecretaria, setOpenSecretaria] = useState(false);
+    const [openCoordenation, setOpenCoordenation] = useState(false);
+    const [openPedagogia, setOpenPedagogia] = useState(false);
+    const [openTesouraria, setOpenTesouraria] = useState(false);
+    const [openLivraria, setOpenLivraria] = useState(false);
 
-    const handleSecretariaClick = () => {
-        setOpenSecretaria(!openSecretaria);
+
+    /** ################### EVENTS FUNCTION ############################### */
+    // 
+    const handleAdministracaoClick = () => {
+        setOpenCoordenation(!openCoordenation)
+        setOpenSecretaria(false);
+        setOpenPedagogia(false);
+        setOpenTesouraria(false)
+        setOpenLivraria(false)
     }
 
+    // 
+    const handleSecretariaClick = () => {
+        setOpenSecretaria(!openSecretaria);
+        setOpenCoordenation(false)
+        setOpenPedagogia(false);
+        setOpenTesouraria(false)
+        setOpenLivraria(false)
+    }
+
+    // 
+    const handlePedagogiaClick = () => {
+        setOpenPedagogia(!openPedagogia);
+        setOpenCoordenation(false)
+        setOpenSecretaria(false);
+        setOpenTesouraria(false)
+        setOpenLivraria(false)
+    }
+
+    // 
+    const handleTesourariaClick = () => {
+        setOpenTesouraria(!openTesouraria)
+        setOpenCoordenation(false)
+        setOpenSecretaria(false);
+        setOpenPedagogia(false);
+        setOpenLivraria(false)
+    }
+
+    // 
+    const handleLivrariaClick = () => {
+        setOpenLivraria(!openLivraria)
+        setOpenCoordenation(false)
+        setOpenSecretaria(false);
+        setOpenPedagogia(false);
+        setOpenTesouraria(false)
+    }
+
+
+
     return (
-        <Box
-            sx={{
-                width: '19rem'
-            }}
-            onClick={onClick}
-        >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ width: '19rem' }} onClick={onClick} >
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: 'space-between' }}>
                 <IconButton>
                     <Avatar />
                 </IconButton>
-
                 <Typography color="info">Slogm</Typography>
+                <IconButton onClick={closeSidebar}>
+                    <CloseIcon />
+                </IconButton>
             </Box>
 
+            {/* Divisor */}
             <Divider />
 
+            {/* Nav */}
             <nav aria-label="">
                 <List>
-                    {/* <ListItem sx={{ display: "block" }}> */}
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <GridView />
+                    {/* Home */}
+                    <ListItemButton >
+                        <ListItemIcon sx={{ minWidth: 35 }}>
+                            <GridView className="!text-xl" color="info" />
                         </ListItemIcon>
-                        <Ancora to={'/newuser'}>
-                            <ListItemText primary="Home" />
+                        <Ancora to={'/'}>
+                            <ListItemText
+                                primary="Home"
+                                slotProps={{ primary: { sx: { fontSize: 16 } } }}
+                            />
                         </Ancora>
                     </ListItemButton>
 
-                    <ListItemButton onClick={handleSecretariaClick}>
-                        <ListItemIcon>
-                            <GridView />
+                    {/* Admin */}
+                    <ListItemButton onClick={handleAdministracaoClick}>
+                        <ListItemIcon sx={{ minWidth: 35 }}>
+                            <AdminPanelSettingsOutlinedIcon className="!text-2xl" color="info" />
                         </ListItemIcon>
-                        <Ancora to={'/allusers'}>
-                            <ListItemText primary="Secretaria" />
-                        </Ancora>
-                        {openSecretaria ? <ExpandLess /> : <ExpandMore />}
+                        <ListItemText primary="Coordenação Geral" />
+
+                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
                     </ListItemButton>
-                    <Collapse in={openSecretaria} timeout={"auto"} unmountOnExit>
-                        <List >
-                            <ListItem >
-                                <ListItemButton>
-                                    <ListItemText primary="Teste 1" />
-                                </ListItemButton>
-                            </ListItem>
+                    <Collapse in={openCoordenation} timeout={"auto"} unmountOnExit>
+                        <List className="!p-0  " >
+                            <Box component={'div'} className="border-l ml-7">
+                                {/* items */}
+                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Professores'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                            </Box>
+
+                            {/* Sub-Item para  Dados Estatístico  */}
+                            <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
+                            <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                            </Box>
                         </List>
                     </Collapse>
-                    {/* </ListItem> */}
+
+                    {/* Secretary */}
+                    <ListItemButton onClick={handleSecretariaClick}>
+                        <ListItemIcon sx={{ minWidth: 35 }}>
+                            <SupervisorIcon className="!text-2xl" color="info" />
+                        </ListItemIcon>
+                        <ListItemText primary="Secretaria" />
+
+                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                    </ListItemButton>
+                    <Collapse in={openSecretaria} timeout={"auto"} unmountOnExit>
+                        <List className="!p-0  " >
+                            <Box component={'div'} className="border-l ml-7">
+                                {/* items */}
+                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Professores'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                            </Box>
+
+                            {/* Sub-Item para  Dados Estatístico  */}
+                            <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
+                            <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                            </Box>
+
+                            {/* Sub-Item para  Dados Estatístico  */}
+                            <SublistItems title='Novos Dados' margin={'ml-[1.45rem] mt-4'} />
+                            <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                            </Box>
+                        </List>
+                    </Collapse>
+
+                    {/* Pedagogy */}
+                    <ListItemButton onClick={handlePedagogiaClick}>
+                        <ListItemIcon sx={{ minWidth: 35 }}>
+                            <SchoolOutlinedIcon className="!text-2xl" color="info" />
+                        </ListItemIcon>
+                        <ListItemText primary="Pedagogia" />
+
+                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                    </ListItemButton>
+                    <Collapse in={openPedagogia} timeout={"auto"} unmountOnExit>
+                        <List className="!p-0  " >
+                            <Box component={'div'} className="border-l ml-7">
+                                {/* items */}
+                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Professores'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                            </Box>
+
+                            {/* Sub-Item para  Dados Estatístico  */}
+                            <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
+                            <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                            </Box>
+                        </List>
+                    </Collapse>
+
+                    {/* Tesouraria */}
+                    <ListItemButton onClick={handleTesourariaClick}>
+                        <ListItemIcon sx={{ minWidth: 35 }}>
+                            <MonetizationOnOutlinedIcon className="!text-2xl" color="info" />
+                        </ListItemIcon>
+                        <ListItemText primary="Tesouraria" />
+
+                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                    </ListItemButton>
+                    <Collapse in={openTesouraria} timeout={"auto"} unmountOnExit>
+                        <List className="!p-0  " >
+                            <Box component={'div'} className="border-l ml-7">
+                                {/* items */}
+                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Professores'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                            </Box>
+
+                            {/* Sub-Item para  Dados Estatístico  */}
+                            <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
+                            <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                            </Box>
+
+                        </List>
+                    </Collapse>
+
+                    {/* Library */}
+                    <ListItemButton onClick={handleLivrariaClick}>
+                        <ListItemIcon sx={{ minWidth: 35 }}>
+                            <AutoStoriesOutlinedIcon className="!text-2xl" color="info" />
+                        </ListItemIcon>
+                        <ListItemText primary="Livraria" />
+
+                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                    </ListItemButton>
+                    <Collapse in={openLivraria} timeout={"auto"} unmountOnExit>
+                        <List className="!p-0  " >
+                            <Box component={'div'} className="border-l ml-7">
+                                {/* items */}
+                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Professores'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                            </Box>
+
+                            {/* Sub-Item para  Dados Estatístico  */}
+                            <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
+                            <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                            </Box>
+                        </List>
+                    </Collapse>
                 </List>
             </nav>
 
@@ -88,3 +265,40 @@ const MobileSidebar = ({ onClick }: SidebarProps) => {
 }
 
 export default MobileSidebar
+
+type SublistItems = {
+    display?: String
+    title: String,
+    margin?: String
+}
+const SublistItems = ({ display, title, margin }: SublistItems) => {
+    return (
+        <div className={`${display} ${margin} flex items-center`}>
+            <SquareRoundedIcon className="!text-xs" />
+            <Typography className="!text-xs uppercase !ml-6 !font-bold">{title}</Typography>
+        </div>
+    )
+}
+
+// 
+type ItemForListType = {
+    route: String,
+    title: String
+}
+
+const ItemForList = ({ title, route }: ItemForListType) => {
+    return (
+        <ListItem className="!pt-0 !pb-0 ">
+            <ListItemButton className="!pb-0 !pt-0">
+                <Ancora to={`${route}`}>
+                    <ListItemText
+                        primary={title}
+                        slotProps={{
+                            primary: { sx: { fontSize: 15 } }
+                        }}
+                    />
+                </Ancora>
+            </ListItemButton>
+        </ListItem>
+    )
+}

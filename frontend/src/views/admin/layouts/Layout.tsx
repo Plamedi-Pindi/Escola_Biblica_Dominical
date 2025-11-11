@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 
 import MainContainer from './components/mainContainer/MainContainer';
 import Main from './components/main/Main';
