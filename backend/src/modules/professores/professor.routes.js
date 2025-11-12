@@ -5,7 +5,7 @@ const ProfessorController = require('./professor.controller')
 
 module.exports = async (fastify) => {
     // 
-    fastify.get('/', ProfessorController.create);
+    fastify.get('/', ProfessorController.getAll);
     // 
     fastify.post('/create', ProfessorController.create);
     // 

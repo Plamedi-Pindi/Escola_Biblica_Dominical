@@ -161,7 +161,7 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                             <Box component={'div'} className="border-l ml-7">
                                 {/* items */}
                                 <ItemForList route={'/allusers'} title={'Lista de Usuários'} />
-                                <ItemForList route={'/newuser'} title={'Lista de Professores'} />
+                                <ItemForList route={'/professores'} title={'Lista de Professores'} />
                                 <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
                             </Box>
 
@@ -171,10 +171,11 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                                 <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
                             </Box>
 
-                            {/* Sub-Item para  Dados Estatístico  */}
+                            {/* Sub-Item para Novos Dados  */}
                             <SublistItems title='Novos Dados' margin={'ml-[1.45rem] mt-4'} />
                             <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                                <ItemForList route={'/newuser'} title={'Cadastrar Usuário'} />
+                                <ItemForList route={'/newProfesser'} title={'Cadastrar Professor'} />
                             </Box>
                         </List>
                     </Collapse>

@@ -10,7 +10,8 @@ const ProfessorSchema = new mongoose.Schema({
     nationality: String,
     status: String,
     startDate: Date,
-    address: String
+    address: String,
+    gender: String
 }) 
 
 
