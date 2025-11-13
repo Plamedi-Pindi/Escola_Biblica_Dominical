@@ -25,7 +25,7 @@ import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlin
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
 import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
 
-import { useState, type EventHandler, type MouseEventHandler } from "react"
+import { useState, type MouseEventHandler } from "react"
 
 
 type SidebarProps = {
