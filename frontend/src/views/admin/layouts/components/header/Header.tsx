@@ -45,8 +45,8 @@ const Header = () => {
     };
 
     return (
-        <header className="w-full pb-14 bg-white">
-            <AppBar sx={{}} className="!bg-gray-50/60 backdrop-blur-sm !border-b-1 !border-b-gray-300 !shadow-none" >
+        <header className="w-full pb-14 bg-white md:hidden">
+            <AppBar className="!bg-gray-50/60 backdrop-blur-sm !border-b-1 !border-b-gray-300 !shadow-none" >
                 <Toolbar>
                     {/* Menu Icon */}
                     <IconButton
@@ -62,20 +62,10 @@ const Header = () => {
                         }}
                         onClick={() => toggleSidebar(true)}
                     >
-                        <CustomDiv padding={'p-1'} rounded={'rounded-xl'}  >
-                            <MenuIcon className="!w-5 !h-5 " />
+                        <CustomDiv padding={'p-1'} rounded={'rounded-lg'}  >
+                            <MenuIcon className="!w-5 !h-5" />
                         </CustomDiv>
                     </IconButton>
-
-                    {/* Logo */}
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
-                    >
-                        MUI
-                    </Typography>
 
                     <Box sx={{ flexGrow: 1 }} />
 
@@ -86,7 +76,7 @@ const Header = () => {
                             aria-label="show 4 new mails"
                             color="info"
                         >
-                            <CustomDiv padding={'p-1'} rounded={'rounded-xl'}>
+                            <CustomDiv padding={'p-1'} rounded={'rounded-lg'}>
                                 <Badge badgeContent={4} color="error">
                                     <MailIcon className="!w-5 !h-5" />
                                 </Badge>
@@ -99,7 +89,7 @@ const Header = () => {
                             color="info"
                             aria-label="show 17 new notifications"
                         >
-                            <CustomDiv padding={'p-1'} rounded={'rounded-xl'}>
+                            <CustomDiv padding={'p-1'} rounded={'rounded-lg'}>
                                 <Badge badgeContent={17} color="error">
                                     <NotificationIcon className="!w-5 !h-5" />
                                 </Badge>
@@ -150,7 +140,7 @@ const Header = () => {
 
             {/* Sidebar Section */}
             <Drawer open={openSidbar} onClose={() => toggleSidebar(false)}>
-                <Sidebar closeSidebar={()=> toggleSidebar(false)}  />
+                <Sidebar closeSidebar={() => toggleSidebar(false)} />
             </Drawer>
         </header>
     )

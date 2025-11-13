@@ -1,19 +1,15 @@
+import AdminRoutes from './routes/admin';
+import AppProvider from './contexts/AppProvider';
 
 import './App.css';
-import UserContext from './contexts/user/UserContext';
-import ProfessorContext from './contexts/professor/professorContext';
-
-import AdminRoutes from './routes/admin';
 
 function App() {
 
   return (
     <>
-      <UserContext>
-        <ProfessorContext>
-          <AdminRoutes />
-        </ProfessorContext>
-      </UserContext>
+      <AppProvider>
+        <AdminRoutes />
+      </AppProvider>
     </>
   )
 }
