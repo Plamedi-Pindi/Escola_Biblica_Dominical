@@ -25,7 +25,7 @@ import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlin
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
 import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
 
-import { useState, type MouseEventHandler } from "react"
+import { useState, type EventHandler, type MouseEventHandler } from "react"
 
 
 type SidebarProps = {
@@ -134,15 +134,15 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                         <List className="!p-0  " >
                             <Box component={'div'} className="border-l ml-7">
                                 {/* items */}
-                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} />
-                                <ItemForList route={'/newuser'} title={'Lista de Professores'} />
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} onClick={closeSidebar} />
+                                <ItemForList route={'/newuser'} title={'Lista de Professores'} onClick={closeSidebar} />
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar} />
                             </Box>
 
                             {/* Sub-Item para  Dados Estatístico  */}
                             <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
                             <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar} />
                             </Box>
                         </List>
                     </Collapse>
@@ -160,22 +160,22 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                         <List className="!p-0  " >
                             <Box component={'div'} className="border-l ml-7">
                                 {/* items */}
-                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} />
-                                <ItemForList route={'/professores'} title={'Lista de Professores'} />
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} onClick={closeSidebar} />
+                                <ItemForList route={'/professores'} title={'Lista de Professores'} onClick={closeSidebar} />
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar} />
                             </Box>
 
                             {/* Sub-Item para  Dados Estatístico  */}
                             <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
                             <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar} />
                             </Box>
 
                             {/* Sub-Item para Novos Dados  */}
                             <SublistItems title='Novos Dados' margin={'ml-[1.45rem] mt-4'} />
                             <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
-                                <ItemForList route={'/newuser'} title={'Cadastrar Usuário'} />
-                                <ItemForList route={'/newProfesser'} title={'Cadastrar Professor'} />
+                                <ItemForList route={'/newuser'} title={'Cadastrar Usuário'} onClick={closeSidebar} />
+                                <ItemForList route={'/newProfesser'} title={'Cadastrar Professor'} onClick={closeSidebar} />
                             </Box>
                         </List>
                     </Collapse>
@@ -193,15 +193,15 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                         <List className="!p-0  " >
                             <Box component={'div'} className="border-l ml-7">
                                 {/* items */}
-                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} />
-                                <ItemForList route={'/newuser'} title={'Lista de Professores'} />
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} onClick={closeSidebar}/>
+                                <ItemForList route={'/newuser'} title={'Lista de Professores'} onClick={closeSidebar}/>
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar}/>
                             </Box>
 
                             {/* Sub-Item para  Dados Estatístico  */}
                             <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
                             <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar}/>
                             </Box>
                         </List>
                     </Collapse>
@@ -219,15 +219,15 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                         <List className="!p-0  " >
                             <Box component={'div'} className="border-l ml-7">
                                 {/* items */}
-                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} />
-                                <ItemForList route={'/newuser'} title={'Lista de Professores'} />
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} onClick={closeSidebar}/>
+                                <ItemForList route={'/newuser'} title={'Lista de Professores'} onClick={closeSidebar}/>
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar}/>
                             </Box>
 
                             {/* Sub-Item para  Dados Estatístico  */}
                             <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
                             <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar}/>
                             </Box>
 
                         </List>
@@ -246,15 +246,15 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                         <List className="!p-0  " >
                             <Box component={'div'} className="border-l ml-7">
                                 {/* items */}
-                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} />
-                                <ItemForList route={'/newuser'} title={'Lista de Professores'} />
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} onClick={closeSidebar}/>
+                                <ItemForList route={'/newuser'} title={'Lista de Professores'} onClick={closeSidebar}/>
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar}/>
                             </Box>
 
                             {/* Sub-Item para  Dados Estatístico  */}
                             <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
                             <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar}/>
                             </Box>
                         </List>
                     </Collapse>
@@ -285,12 +285,13 @@ const SublistItems = ({ display, title, margin }: SublistItems) => {
 type ItemForListType = {
     route: String,
     title: String
+    onClick: MouseEventHandler
 }
 
-const ItemForList = ({ title, route }: ItemForListType) => {
+const ItemForList = ({ title, route, onClick }: ItemForListType) => {
     return (
         <ListItem className="!pt-0 !pb-0 ">
-            <ListItemButton className="!pb-0 !pt-0">
+            <ListItemButton className="!pb-0 !pt-0" onClick={onClick}>
                 <Ancora to={`${route}`}>
                     <ListItemText
                         primary={title}

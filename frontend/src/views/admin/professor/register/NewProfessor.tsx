@@ -9,6 +9,9 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import FormLabel from "@mui/material/FormLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
 
 // Icons
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -54,7 +57,7 @@ const NewProfessorPage = () => {
                     </div>
                 </div>
 
-                <div className="w-full h-auto bg-white mt-4 rounded-lg shadow-sm p-4  ">
+                <div className="w-full h-auto bg-white mt-4 rounded-lg shadow-sm p-4 pb-10  ">
                     {/* Nome */}
                     <div className="w-full pb-4">
                         {/* <label>Nome</label> */}
@@ -83,43 +86,99 @@ const NewProfessorPage = () => {
                             variant="standard"
                             fullWidth
                         />
-
                     </div>
 
-                    {/*  */}
-                    <div className="mb-5 flex  justify-between items-center">
+                    {/* Nationality */}
+                    <div className="mt-4">
+                        <TextField
+                            type="text"
+                            label="Nacionalidade"
+                            variant="standard"
+                            fullWidth
+                        />
+                    </div>
+
+                    {/* Address */}
+                    <div className="mt-4">
+                        <TextField
+                            type="text"
+                            label="Endereço"
+                            fullWidth
+                            variant="standard"
+                        />
+                    </div>
+
+                    {/* Phone */}
+                    <div className="mt-4 flex flex-col gap-y-4 ">
+                        <TextField
+                            type="tel"
+                            label="Telefone"
+                            fullWidth
+                            variant="standard"
+                        />
+
+                        <TextField
+                            type="tel"
+                            label="Telefone alternativo"
+                            fullWidth
+                            variant="standard"
+                        />
+                    </div>
+
+                    {/* Birthday */}
+                    <div className="mt-5 flex  justify-between items-end gap-x-4">
                         <div>
-                            <FormLabel className="">Data de nacimento </FormLabel>
+                            <FormLabel className="!block">Data de nacimento </FormLabel>
                             <TextField
                                 type="date"
                                 variant="standard"
-                                slotProps={{
-                                    inputLabel: { shrink: true },
-                                }}
                             />
                         </div>
-                        <div>
+
+                        <div className="">
+                            <FormLabel className="!block">Professor desde</FormLabel>
                             <TextField
-                                type="text"
-                                label="Nacionalidade"
+                                type="date"
                                 variant="standard"
-                               
                             />
                         </div>
+
                     </div>
 
+                    {/* Gender */}
                     <div className="mt-4">
                         <FormLabel className="">Gênero </FormLabel>
-                            <RadioGroup 
-                                row
-                            >
-                                <FormControlLabel value="masculino" control={<Radio />} label="Maculino" />
-                                <FormControlLabel value="femenino" control={<Radio />} label="Femenino" />
-                            </RadioGroup>
-
+                        <RadioGroup
+                            row
+                        >
+                            <FormControlLabel value="masculino" control={<Radio />} label="Maculino" />
+                            <FormControlLabel value="femenino" control={<Radio />} label="Femenino" />
+                        </RadioGroup>
                     </div>
+
+                    {/* Status */}
+                    <div className="mt-4">
+                        <InputLabel>Estado</InputLabel>
+                        <Select
+                            label="Estado"
+                            variant="standard"
+                            fullWidth
+                        >
+                            <MenuItem value={''}>Ativo</MenuItem>
+                            <MenuItem value={''}>Inativo</MenuItem>
+                            <MenuItem value={''}>Falecido</MenuItem>
+                        </Select>
+                    </div>
+
                 </div>
 
+                <div className="w-full flex justify-end mt-5 mb-10">
+                    <Button
+                        variant="contained"
+                    >
+                        Cadastrar
+                    </Button>
+                </div>
             </form>
         </CustomContainer>
     )
