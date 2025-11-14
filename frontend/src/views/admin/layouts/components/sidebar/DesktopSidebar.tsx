@@ -25,7 +25,7 @@ import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlin
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
 import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
 
-import { useState, type MouseEventHandler, } from "react";
+import { type MouseEventHandler, } from "react";
 import { Link as Ancora } from "react-router-dom"
 import { useSidebarContext } from '../../../../../contexts/sidebar/SidebarContext';
 
@@ -96,12 +96,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 type DesktopSidebarType = {
-    handleDrawerOpen: MouseEventHandler,
     handleDrawerClose: MouseEventHandler
     open: boolean
 }
 
-const DesktopSidebar = ({ handleDrawerClose, handleDrawerOpen, open }: DesktopSidebarType) => {
+const DesktopSidebar = ({ handleDrawerClose, open }: DesktopSidebarType) => {
     const theme = useTheme();
 
     const [

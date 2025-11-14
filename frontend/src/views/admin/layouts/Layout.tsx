@@ -4,9 +4,6 @@ import MainContainer from './components/mainContainer/MainContainer';
 import Main from './components/main/Main';
 import Header from './components/header/Header';
 import DesktopSidebar from './components/sidebar/DesktopSidebar';
-import Box from '@mui/material/Box';
-
-import { useState } from 'react';
 
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -31,7 +28,6 @@ const LayoutPage = () => {
 
                 <DesktopSidebar
                     handleDrawerClose={handleDrawerClose}
-                    handleDrawerOpen={handleDrawerOpen}
                     open={openDkSidebar}
                 />
 
