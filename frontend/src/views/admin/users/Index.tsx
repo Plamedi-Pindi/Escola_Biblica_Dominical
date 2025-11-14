@@ -134,7 +134,7 @@ const UsersPages = () => {
 
     // Retorno do componente
     return (
-        <div className={`w-full p-2 bg-white `}>
+        <div className={`w-full p-2 bg-white  mt-10`}>
             <h2 className="text-black mb-4">Todos os usuários</h2>
 
             {/* Tabela de usuarios */}

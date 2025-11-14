@@ -96,6 +96,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 type DesktopSidebarType = {
+    handleDrawerOpen: MouseEventHandler,
     handleDrawerClose: MouseEventHandler
     open: boolean
 }

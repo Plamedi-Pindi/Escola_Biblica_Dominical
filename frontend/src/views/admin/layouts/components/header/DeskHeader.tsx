@@ -87,12 +87,11 @@ const DesHeader = ({ handleDrawerOpen, openDesktopSidebar }: HeaderType) => {
     };
 
     return (
-        <header className="w-full pb-14 bg-white hidden md:block ">
+        <header className=" bg-white hidden md:block   ">
             <AppBar
                 open={openDesktopSidebar}
                 position="fixed"
-                // sx={{ display: { xs: 'none' } }}
-                className="!bg-gray-50/60 backdrop-blur-sm h-13 !border-b-1 !border-b-gray-300 !shadow-none !flex justify-center"
+                className="!bg-gray-50/30 backdrop-blur-sm h-13 !border-b-1 !border-b-gray-300 !shadow-none !flex justify-center"
             >
                 <Toolbar className="">
                     {/* Menu Icon */}

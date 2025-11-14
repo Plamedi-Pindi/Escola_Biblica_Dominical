@@ -7,10 +7,13 @@ type MainContainerProps = {
 const MainContainer = ({children}: MainContainerProps) => {
 
     return (
-        <div className="bg-[#FAFBFF] h-[100dvh] ">
+        <div className="  h-[100dvh] md:flex ">
             {children}
         </div>
     )
 }
 
 export default MainContainer
+
+
+// bg-[#FAFBFF]

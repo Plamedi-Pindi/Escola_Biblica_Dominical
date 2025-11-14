@@ -6,9 +6,9 @@ type SidebarProps = {
 
 const Main = ({children}: SidebarProps) => {
     return (
-        <nav>
+        <main className="overflow-x-hidden p-4 grow">
             {children}
-        </nav>
+        </main>
     )
 }
 
