@@ -4,9 +4,9 @@ import MainAPI from '../../services/apis/MainAPI';
 import type { PorfessorDataType } from '../../types/professor/ProfessorTypes';
 
 /** #################### Tipagens ######################### */
-type MyContextType = {
-
-}
+type MyContextType = [
+    allProfessorsData: PorfessorDataType[]
+]
 type ProfessorContextType = {
     children: ReactNode
 }

@@ -88,7 +88,7 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                         </ListItemIcon>
                         <ListItemText primary="Coordenação Geral" />
 
-                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                        {openCoordenation ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
                     </ListItemButton>
                     <Collapse in={openCoordenation} timeout={"auto"} unmountOnExit>
                         <List className="!p-0  " >
@@ -147,7 +147,7 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                         </ListItemIcon>
                         <ListItemText primary="Pedagogia" />
 
-                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                        {openPedagogia ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
                     </ListItemButton>
                     <Collapse in={openPedagogia} timeout={"auto"} unmountOnExit>
                         <List className="!p-0  " >
@@ -173,7 +173,7 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                         </ListItemIcon>
                         <ListItemText primary="Tesouraria" />
 
-                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                        {openTesouraria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
                     </ListItemButton>
                     <Collapse in={openTesouraria} timeout={"auto"} unmountOnExit>
                         <List className="!p-0  " >
@@ -200,7 +200,7 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                         </ListItemIcon>
                         <ListItemText primary="Livraria" />
 
-                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                        {openLivraria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
                     </ListItemButton>
                     <Collapse in={openLivraria} timeout={"auto"} unmountOnExit>
                         <List className="!p-0  " >

@@ -21,7 +21,7 @@ const RegisterUserPage = () => {
 
     // Form submit Function
     const formSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+        e.preventDefault(); 
 
         try {
             const response = await MainAPI.post('/users/new', formData);
@@ -80,7 +80,7 @@ const RegisterUserPage = () => {
                             onChange={handleFirstNameChange}
                             className="border-1 w-full border-gray-300 rounded-sm p-1"
                         />
-                    </div>
+                    </div> 
 
                     {/* Last name */}
                     <div className="mt-4 w-full">

@@ -18,8 +18,58 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 import CustomContainer from "../../../../components/Container/Container";
+import { useState, type FormEvent } from "react";
+import type { FormDataType } from "../../../../types/professor/ProfessorTypes";
+import MainAPI from "../../../../services/apis/MainAPI";
+import { useNavigate } from "react-router-dom";
+
+
+const initialFormData = {
+    name: { first: '', last: '' },
+    birthday: '',
+    email: '',
+    telephone: { primary: '', secound: '' },
+    nationality: '',
+    startDate: '',
+    address: '',
+    gender: '',
+    status: ''
+}
 
 const NewProfessorPage = () => {
+    const [formData, setFormData] = useState<FormDataType>(initialFormData)
+
+    const navigate = useNavigate();
+
+    // Form submit
+    const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        try {
+            const response = await MainAPI.post('/professores/create', formData);
+
+            if (response) {
+                setFormData({
+                    name: { first: '', last: '' },
+                    birthday: '',
+                    email: '',
+                    telephone: { primary: '', secound: '' },
+                    nationality: '',
+                    startDate: '',
+                    address: '',
+                    gender: '',
+                    status: ''
+                })
+            }
+
+            return response;
+
+        } catch (error) {
+            console.error("Houve um erro ao cadastrar professor!", error);
+        }
+    }
+
+
     return (
         <CustomContainer style="p-3" >
             <Typography className="!text-lg !mb-4">Cadastrar Professor</Typography>
@@ -42,12 +92,13 @@ const NewProfessorPage = () => {
                     variant="outlined"
                     startIcon={<ListAltIcon />}
                     className="!text-green-600 !text-xs !border-green-600 !mt-4"
+                    onClick={()=> navigate('/professores')}
                 >
                     Lista de Professores
                 </Button>
             </Box>
 
-            <form className="mt-4">
+            <form onSubmit={handleFormSubmit} className="mt-4" >
                 <div className="w-full h-24 bg-white shadow-sm rounded-lg flex items-center pl-4 ">
                     <div className="flex flex-col items-center gap-y-1" >
                         <div className="rounded-full bg-gray-200 w-14 h-14 flex items-center justify-center p-1">
@@ -64,16 +115,32 @@ const NewProfessorPage = () => {
                         <TextField
                             label="Primeiro nome"
                             type="text"
+                            value={formData.name.first}
                             variant="standard"
                             fullWidth
                             className="!mb-4"
+                            onChange={(e) => setFormData({
+                                ...formData,
+                                name: {
+                                    first: e.target.value,
+                                    last: formData?.name.last
+                                }
+                            })}
                         />
 
                         <TextField
                             label="Último nome"
                             type="text"
+                            value={formData.name.last}
                             variant="standard"
                             fullWidth
+                            onChange={(e) => setFormData({
+                                ...formData,
+                                name: {
+                                    first: formData.name.first,
+                                    last: e.target.value
+                                }
+                            })}
                         />
                     </div>
 
@@ -85,6 +152,11 @@ const NewProfessorPage = () => {
                             type="text"
                             variant="standard"
                             fullWidth
+                            value={formData.email}
+                            onChange={(e) => setFormData({
+                                ...formData,
+                                email: e.target.value
+                            })}
                         />
                     </div>
 
@@ -95,6 +167,8 @@ const NewProfessorPage = () => {
                             label="Nacionalidade"
                             variant="standard"
                             fullWidth
+                            value={formData.nationality}
+                            onChange={(e) => setFormData({ ...formData, nationality: e.target.value })}
                         />
                     </div>
 
@@ -105,6 +179,8 @@ const NewProfessorPage = () => {
                             label="Endereço"
                             fullWidth
                             variant="standard"
+                            value={formData.address}
+                            onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                         />
                     </div>
 
@@ -115,6 +191,14 @@ const NewProfessorPage = () => {
                             label="Telefone"
                             fullWidth
                             variant="standard"
+                            value={formData.telephone.primary}
+                            onChange={(e) => setFormData({
+                                ...formData,
+                                telephone: {
+                                    primary: e.target.value,
+                                    secound: formData.telephone.secound
+                                }
+                            })}
                         />
 
                         <TextField
@@ -122,24 +206,37 @@ const NewProfessorPage = () => {
                             label="Telefone alternativo"
                             fullWidth
                             variant="standard"
+                            value={formData.telephone.secound}
+                            onChange={(e) => setFormData({
+                                ...formData,
+                                telephone: {
+                                    primary: formData.telephone.primary,
+                                    secound: e.target.value
+                                }
+                            })}
                         />
                     </div>
 
-                    {/* Birthday */}
                     <div className="mt-5 flex  justify-between items-end gap-x-4">
+                        {/* Birthday */}
                         <div>
                             <FormLabel className="!block">Data de nacimento </FormLabel>
                             <TextField
                                 type="date"
                                 variant="standard"
+                                value={formData.birthday}
+                                onChange={(e) => setFormData({ ...formData, birthday: e.target.value })}
+
                             />
                         </div>
-
+                        {/* Date that started working */}
                         <div className="">
                             <FormLabel className="!block">Professor desde</FormLabel>
                             <TextField
                                 type="date"
                                 variant="standard"
+                                value={formData.startDate}
+                                onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
                             />
                         </div>
 
@@ -150,6 +247,8 @@ const NewProfessorPage = () => {
                         <FormLabel className="">Gênero </FormLabel>
                         <RadioGroup
                             row
+                            value={formData.gender}
+                            onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                         >
                             <FormControlLabel value="masculino" control={<Radio />} label="Maculino" />
                             <FormControlLabel value="femenino" control={<Radio />} label="Femenino" />
@@ -163,10 +262,12 @@ const NewProfessorPage = () => {
                             label="Estado"
                             variant="standard"
                             fullWidth
+                            value={formData.status}
+                            onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                         >
-                            <MenuItem value={''}>Ativo</MenuItem>
-                            <MenuItem value={''}>Inativo</MenuItem>
-                            <MenuItem value={''}>Falecido</MenuItem>
+                            <MenuItem value={'ativo'}>Ativo</MenuItem>
+                            <MenuItem value={'inativo'}>Inativo</MenuItem>
+                            <MenuItem value={'falecido'}>Falecido</MenuItem>
                         </Select>
                     </div>
 
@@ -175,6 +276,7 @@ const NewProfessorPage = () => {
                 <div className="w-full flex justify-end mt-5 mb-10">
                     <Button
                         variant="contained"
+                        type="submit"
                     >
                         Cadastrar
                     </Button>

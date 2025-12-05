@@ -30,7 +30,6 @@ import { Link as Ancora } from "react-router-dom"
 import { useSidebarContext } from '../../../../../contexts/sidebar/SidebarContext';
 
 
-
 // 
 const drawerWidth = 240;
 
@@ -119,7 +118,13 @@ const DesktopSidebar = ({ handleDrawerClose, open }: DesktopSidebarType) => {
 
 
     return (
-        <Drawer variant="permanent" open={open} sx={{ display: { xs: 'none', md: 'block' } }}>
+        <Drawer
+            variant="permanent"
+            open={open}
+            sx={{
+                display: { xs: 'none', md: 'block' }
+            }}
+        >
             <DrawerHeader sx={{ height: 14, }}>
                 <IconButton onClick={handleDrawerClose}>
                     {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -129,16 +134,21 @@ const DesktopSidebar = ({ handleDrawerClose, open }: DesktopSidebarType) => {
             <Divider />
 
             <nav className=''>
-                <List>
+                <List className='!ml-2'>
                     {/* Home */}
-                    <ListItemButton >
+                    <ListItemButton  >
                         <ListItemIcon sx={{ minWidth: 35 }}>
-                            <GridView className="!text-xl" color="info" />
+                            <GridView className="!text-xl !text-gray-600 " />
                         </ListItemIcon>
                         <Ancora to={'/'}>
                             <ListItemText
                                 primary="Home"
-                                slotProps={{ primary: { sx: { fontSize: '0.875rem', fontWeight: 'bold' } } }}
+                                slotProps={{
+                                    primary: {
+                                        fontSize: '0.875rem',
+                                        fontWeight: 600,
+                                    }
+                                }}
                             />
                         </Ancora>
                     </ListItemButton>
@@ -146,13 +156,13 @@ const DesktopSidebar = ({ handleDrawerClose, open }: DesktopSidebarType) => {
                     {/* Admin */}
                     <ListItemButton onClick={handleAdministracaoClick}>
                         <ListItemIcon sx={{ minWidth: 35 }}>
-                            <AdminPanelSettingsOutlinedIcon className="!text-2xl" color="info" />
+                            <AdminPanelSettingsOutlinedIcon className="!text-xl !text-gray-600 " />
                         </ListItemIcon>
                         <ListItemText primary="Coordenação Geral"
                             slotProps={{ primary: { sx: { fontSize: '0.875rem', fontWeight: 'bold' } } }}
                         />
 
-                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                        {openCoordenation ? <ExpandLess color="info" className='!text-lg' /> : <ExpandMore color="info" className='!text-lg' />}
                     </ListItemButton>
                     <Collapse in={openCoordenation} timeout={"auto"} unmountOnExit>
                         <List className="!p-0  " >
@@ -174,13 +184,13 @@ const DesktopSidebar = ({ handleDrawerClose, open }: DesktopSidebarType) => {
                     {/* Secretary */}
                     <ListItemButton onClick={handleSecretariaClick}>
                         <ListItemIcon sx={{ minWidth: 35 }}>
-                            <SupervisorIcon className="!text-2xl" color="info" />
+                            <SupervisorIcon className="!text-xl !text-gray-600 " />
                         </ListItemIcon>
                         <ListItemText primary="Secretaria"
                             slotProps={{ primary: { sx: { fontSize: '0.875rem', fontWeight: 'bold' } } }}
                         />
 
-                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                        {openSecretaria ? <ExpandLess color="info" className='!text-lg' /> : <ExpandMore color="info" className='!text-lg' />}
                     </ListItemButton>
                     <Collapse in={openSecretaria} timeout={"auto"} unmountOnExit>
                         <List className="!p-0  " >
@@ -209,13 +219,13 @@ const DesktopSidebar = ({ handleDrawerClose, open }: DesktopSidebarType) => {
                     {/* Pedagogy */}
                     <ListItemButton onClick={handlePedagogiaClick}>
                         <ListItemIcon sx={{ minWidth: 35 }}>
-                            <SchoolOutlinedIcon className="!text-2xl" color="info" />
+                            <SchoolOutlinedIcon className="!text-xl !text-gray-600" />
                         </ListItemIcon>
                         <ListItemText primary="Pedagogia"
                             slotProps={{ primary: { sx: { fontSize: '0.875rem', fontWeight: 'bold' } } }}
                         />
 
-                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                        {openPedagogia ? <ExpandLess color="info" className='!text-lg' /> : <ExpandMore color="info" className='!text-lg' />}
                     </ListItemButton>
                     <Collapse in={openPedagogia} timeout={"auto"} unmountOnExit>
                         <List className="!p-0  " >
@@ -237,13 +247,13 @@ const DesktopSidebar = ({ handleDrawerClose, open }: DesktopSidebarType) => {
                     {/* Tesouraria */}
                     <ListItemButton onClick={handleTesourariaClick}>
                         <ListItemIcon sx={{ minWidth: 35 }}>
-                            <MonetizationOnOutlinedIcon className="!text-2xl" color="info" />
+                            <MonetizationOnOutlinedIcon className="!text-xl !text-gray-600  " />
                         </ListItemIcon>
                         <ListItemText primary="Tesouraria"
                             slotProps={{ primary: { sx: { fontSize: '0.875rem', fontWeight: 'bold' } } }}
                         />
 
-                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                        {openTesouraria ? <ExpandLess color="info" className='!text-lg' /> : <ExpandMore color="info" className='!text-lg' />}
                     </ListItemButton>
                     <Collapse in={openTesouraria} timeout={"auto"} unmountOnExit>
                         <List className="!p-0  " >
@@ -266,13 +276,13 @@ const DesktopSidebar = ({ handleDrawerClose, open }: DesktopSidebarType) => {
                     {/* Library */}
                     <ListItemButton onClick={handleLivrariaClick}>
                         <ListItemIcon sx={{ minWidth: 35 }}>
-                            <AutoStoriesOutlinedIcon className="!text-2xl" color="info" />
+                            <AutoStoriesOutlinedIcon className="!text-xl !text-gray-600 " />
                         </ListItemIcon>
                         <ListItemText primary="Livraria"
                             slotProps={{ primary: { sx: { fontSize: '0.875rem', fontWeight: 'bold' } } }}
                         />
 
-                        {openSecretaria ? <ExpandLess color="info" /> : <ExpandMore color="info" />}
+                        {openLivraria ? <ExpandLess color="info" className='!text-lg' /> : <ExpandMore color="info" className='!text-lg' />}
                     </ListItemButton>
                     <Collapse in={openLivraria} timeout={"auto"} unmountOnExit>
                         <List className="!p-0  " >

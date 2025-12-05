@@ -96,7 +96,7 @@ const Header = () => {
                             </CustomDiv>
                         </IconButton>
                     </Box>
-
+ 
                     {/* Avatar */}
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open sittings">

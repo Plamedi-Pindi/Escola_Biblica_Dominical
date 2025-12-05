@@ -16,7 +16,7 @@ exports.getAllProfessores = async () => {
 
 // 
 exports.createOneProfessor = async (data) => {
-    const professor = await new Pofessor(data);
+    const professor = await new Professor(data);
     return professor.save();
 }
 
