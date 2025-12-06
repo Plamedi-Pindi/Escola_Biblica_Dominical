@@ -72,7 +72,7 @@ const NewProfessorPage = () => {
 
     return (
         <CustomContainer style="p-3" >
-            <Typography className="!text-lg !mb-4">Cadastrar Professor</Typography>
+            <Typography className="!text-lg !mb-4 !font-bold">Cadastrar Professor</Typography>
 
             <Box>
                 <Breadcrumbs aria-label="breadcrumb" className="!text-sm">
@@ -250,8 +250,8 @@ const NewProfessorPage = () => {
                             value={formData.gender}
                             onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                         >
-                            <FormControlLabel value="masculino" control={<Radio />} label="Maculino" />
-                            <FormControlLabel value="femenino" control={<Radio />} label="Femenino" />
+                            <FormControlLabel value="Masculino" control={<Radio />} label="Maculino" />
+                            <FormControlLabel value="Femenino" control={<Radio />} label="Femenino" />
                         </RadioGroup>
                     </div>
 
@@ -265,9 +265,9 @@ const NewProfessorPage = () => {
                             value={formData.status}
                             onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                         >
-                            <MenuItem value={'ativo'}>Ativo</MenuItem>
-                            <MenuItem value={'inativo'}>Inativo</MenuItem>
-                            <MenuItem value={'falecido'}>Falecido</MenuItem>
+                            <MenuItem value={'Ativo'}>Ativo</MenuItem>
+                            <MenuItem value={'Inativo'}>Inativo</MenuItem>
+                            <MenuItem value={'Falecido'}>Falecido</MenuItem>
                         </Select>
                     </div>
 

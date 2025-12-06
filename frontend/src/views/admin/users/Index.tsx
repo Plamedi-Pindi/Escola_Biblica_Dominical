@@ -13,14 +13,22 @@ import IconButton from "@mui/material/IconButton";
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import type { TransitionProps } from '@mui/material/transitions';
+import Button from '@mui/material/Button';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 // Icons
 import Delete from "@mui/icons-material/Delete";
 import Edit from "@mui/icons-material/Edit";
 import Visibility from "@mui/icons-material/Visibility";
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 // Services
 import MainAPI from "../../../services/apis/MainAPI";
+import { useUserContext } from '../../../contexts/user/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 // Hooks
 import { useState, useCallback, useMemo } from "react";
@@ -31,8 +39,7 @@ import UpdateUser from "./update/Update";
 // Import Types
 import type { UserFormType } from "../../../types/user/UserTypes";
 
-// 
-import { useUserContext } from '../../../contexts/user/UserContext';
+
 
 
 
@@ -60,6 +67,7 @@ const UsersPages = () => {
     const [updateModalOpen, setUpdateModalOpen] = useState(false)    // State for Modal
     const [user, setUser] = useState<UserFormType>(initialFormData)
 
+    const navigate = useNavigate();
     // 
     const [
         allUsersData,
@@ -134,22 +142,48 @@ const UsersPages = () => {
 
     // Retorno do componente
     return (
-        <div className={`w-full p-2 bg-white  mt-10`}>
-            <h2 className="text-black mb-4">Todos os usuários</h2>
+        <div className={`w-full p-2 bg-white `}>
+            <Typography className='text-lg !mb-4 !font-bold'> Todos os usuários </Typography>
+
+            <Box>
+                <Breadcrumbs aria-label="breadcrumb" className="!text-sm">
+                    <Link underline="hover" color="inherit" href="/">
+                        Home
+                    </Link>
+
+                    <Link underline="hover" color="primary" href="/professores">
+                        Professores
+                    </Link>
+                </Breadcrumbs>
+
+                <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+                    <Button
+                        variant="contained"
+                        startIcon={<ListAltIcon />}
+                        className=" !text-xs  !mt-4"
+                        onClick={() => navigate('/newProfesser')}
+                    >
+                        Novo Usário
+                    </Button>
+                </Box>
+
+            </Box>
 
             {/* Tabela de usuarios */}
-            <DataGrid
-                rows={rows}
-                columns={columns}
-                pageSizeOptions={[5, 10, 20]}
-                initialState={{
-                    pagination: { paginationModel: { pageSize: 10, page: 0 } },
-                }}
-                checkboxSelection
-                disableRowSelectionOnClick
-                // slots={{ toolbar: CustomToolbar }}
-                showToolbar
-            />
+            <div className='mt-5'>
+                <DataGrid
+                    rows={rows}
+                    columns={columns}
+                    pageSizeOptions={[5, 10, 20]}
+                    initialState={{
+                        pagination: { paginationModel: { pageSize: 10, page: 0 } },
+                    }}
+                    checkboxSelection
+                    disableRowSelectionOnClick
+                    // slots={{ toolbar: CustomToolbar }}
+                    showToolbar
+                />
+            </div>
 
             {/* Modal para atualizacao de usarios */}
             <Dialog
