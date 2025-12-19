@@ -1,12 +1,10 @@
 // MUI
 import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
-import IconButton from "@mui/material/IconButton"
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import SaveIcon from "@mui/icons-material/Save"
-import CloseIcon from "@mui/icons-material/Close"
 import TextField from "@mui/material/TextField"
 import FormLabel from "@mui/material/FormLabel"
 import MenuItem from "@mui/material/MenuItem"
@@ -42,10 +40,10 @@ const UpdateProfessor = ({ onClick, professor, Alert }: Props) => {
             const message = 'O professor foi atualizado com sucesso!'
             const status = true;
             const type = 'success';
-            // const response = await MainAPI.put(`/professores/update/${id}`, formData);
+            const response = await MainAPI.put(`/professores/update/${id}`, formData);
             Alert(message, status, type)
 
-            // return response;
+            return response;
         } catch (error) {
             console.error("Houve um erro ao autalizar o professor!", error);
         }

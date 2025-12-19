@@ -9,7 +9,6 @@ import {
 
 // Material UI
 import Stack from "@mui/material/Stack";
-import IconButton from "@mui/material/IconButton";
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import type { TransitionProps } from '@mui/material/transitions';
