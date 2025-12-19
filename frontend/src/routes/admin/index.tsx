@@ -13,7 +13,7 @@ const AdminRoutes = () => {
         <Router>
             <Routes>
                 <Route path='/' element={<LayoutPage />} >
-                    <Route element={<HomePage />} />
+                    <Route index element={<HomePage />} />
                     {/* User Reoutes */}
                     <Route path='/newuser' element={<RegisterUserPage />} />
                     <Route path='/allusers' element={<UserPage />} />

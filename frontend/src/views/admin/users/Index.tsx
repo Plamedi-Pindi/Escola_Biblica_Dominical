@@ -20,9 +20,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 // Icons
-import Delete from "@mui/icons-material/Delete";
-import Edit from "@mui/icons-material/Edit";
-import Visibility from "@mui/icons-material/Visibility";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 
 // Services
@@ -35,12 +32,12 @@ import { useState, useCallback, useMemo } from "react";
 
 // Components
 import UpdateUser from "./update/Update";
+import EditButton from '../../../components/Buttons/EditButton';
+import DeleteButton from '../../../components/Buttons/DeleteButton';
+import ViewButton from '../../../components/Buttons/ViewButton';
 
 // Import Types
 import type { UserFormType } from "../../../types/user/UserTypes";
-
-
-
 
 
 // MUI Transition
@@ -87,7 +84,7 @@ const UsersPages = () => {
     // Função para eliminar um usuario por meio de requisição no API
     const deleteOneUser = useCallback(async (id: String) => {
         try {
-            const result = await MainAPI.delete(`users/remover/${id}`);
+            const result = await MainAPI.delete(`/users/remover/${id}`);
             console.log(result);
         } catch (error) {
             console.error('Error ao deletar um usario!', error);
@@ -116,23 +113,17 @@ const UsersPages = () => {
         {
             field: 'actions',
             headerName: 'Ações',
-            width: 150,
+            width: 190,
             sortable: false,
             filterable: false,
             renderCell: (params) => (
                 <Stack spacing={1} direction="row"  >
-                    <IconButton aria-label="view" >
-                        <Visibility className="border-1  rounded  text-orange-400" />
-                    </IconButton>
-
-                    <IconButton aria-label="update" onClick={() => handleUpdateOpen(params.row.id)} >
-                        <Edit color="primary" className="border-1 rounded" />
-                    </IconButton>
-
-                    <IconButton aria-label="delete" >
-                        <Delete onClick={() => deleteOneUser(params.row.id)} className="text-red-500 border-1 rounded " />
-                    </IconButton>
-
+                    {/* Button to update a file */}
+                    <EditButton onClick={() => handleUpdateOpen(params.row.id)} />
+                    {/* Button to view details */}
+                    <ViewButton />
+                    {/* button to delete a file */}
+                    <DeleteButton onClick={() => deleteOneUser(params.row.id)} />
                 </Stack>
             )
         },
@@ -161,7 +152,7 @@ const UsersPages = () => {
                         variant="contained"
                         startIcon={<ListAltIcon />}
                         className=" !text-xs  !mt-4"
-                        onClick={() => navigate('/newProfesser')}
+                        onClick={() => navigate('/newuser')}
                     >
                         Novo Usário
                     </Button>

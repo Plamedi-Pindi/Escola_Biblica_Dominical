@@ -54,9 +54,9 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
         <Box sx={{ width: '19rem' }} onClick={onClick} >
             <Box sx={{ display: "flex", alignItems: "center", justifyContent: 'space-between' }}>
                 <IconButton>
-                    <Avatar />
+                    <Avatar  />
                 </IconButton>
-                <Typography color="info">Slogm</Typography>
+                <Typography color="info">EBD Sião</Typography>
                 <IconButton onClick={closeSidebar}>
                     <CloseIcon />
                 </IconButton>
@@ -128,7 +128,8 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                             {/* Sub-Item para  Dados Estatístico  */}
                             <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
                             <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar} />
+                                <ItemForList route={''} title={'Dados de Alunos'} onClick={closeSidebar} />
+                                <ItemForList route={''} title={'Dados de Professores'} onClick={closeSidebar} />
                             </Box>
 
                             {/* Sub-Item para Novos Dados  */}
@@ -187,7 +188,8 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                             {/* Sub-Item para  Dados Estatístico  */}
                             <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
                             <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar} />
+                                <ItemForList route={''} title={'Dados de Alunos'} onClick={closeSidebar} />
+                                <ItemForList route={''} title={'Dados de Professores'} onClick={closeSidebar} />
                             </Box>
 
                         </List>

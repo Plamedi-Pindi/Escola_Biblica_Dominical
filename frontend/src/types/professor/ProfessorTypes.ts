@@ -2,14 +2,14 @@
 
 export type PorfessorDataType = {
     _id: String,
-    image: string,
+    image: String,
     name: { first: String, last: String },
-    birthday: Date,
+    birthday: String,
     telephone: { primary: String, secound: String },
     email: String,
     nationality: String,
     status: String,
-    startDate: Date,
+    startDate: String,
     address: String,
     gender: String
 }

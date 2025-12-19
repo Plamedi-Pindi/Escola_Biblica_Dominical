@@ -7,7 +7,7 @@ type CustomContainerType = {
 
 const CustomContainer = ({ children, style }: CustomContainerType) => {
     return (
-        <div className={`${style}`}>
+        <div className={`${style} relative`}>
             {children}
         </div>
     )

@@ -1,104 +1,79 @@
-// 
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
-import Link from "@mui/material/Link";
-import TextField from "@mui/material/TextField";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Radio from "@mui/material/Radio";
-import FormLabel from "@mui/material/FormLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
+// MUI
+import AppBar from "@mui/material/AppBar"
+import Toolbar from "@mui/material/Toolbar"
+import IconButton from "@mui/material/IconButton"
+import Typography from "@mui/material/Typography"
+import Button from "@mui/material/Button"
+import Box from "@mui/material/Box"
+import SaveIcon from "@mui/icons-material/Save"
+import CloseIcon from "@mui/icons-material/Close"
+import TextField from "@mui/material/TextField"
+import FormLabel from "@mui/material/FormLabel"
+import MenuItem from "@mui/material/MenuItem"
+import InputLabel from "@mui/material/InputLabel"
+import Select from "@mui/material/Select"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import RadioGroup from "@mui/material/RadioGroup"
+import Radio from "@mui/material/Radio"
 
-// Icons
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import CameraAltIcon from "@mui/icons-material/CameraAlt"
 
-import CustomContainer from "../../../../components/Container/Container";
-import { useState, type FormEvent } from "react";
-import type { FormDataType } from "../../../../types/professor/ProfessorTypes";
-import MainAPI from "../../../../services/apis/MainAPI";
-import { useNavigate } from "react-router-dom";
+// Componentes
+import CustomForm from "../../../../components/Form/CustomForm"
+import type { PorfessorDataType } from "../../../../types/professor/ProfessorTypes"
+import { useState, type FormEvent } from "react"
+import MainAPI from "../../../../services/apis/MainAPI"
 
-
-const initialFormData = {
-    name: { first: '', last: '' },
-    birthday: '',
-    email: '',
-    telephone: { primary: '', secound: '' },
-    nationality: '',
-    startDate: '',
-    address: '',
-    gender: '',
-    status: ''
+type Props = {
+    onClick: () => void
+    professor: PorfessorDataType
+    Alert: (text: string, status: boolean, type: string) => void
 }
 
-const NewProfessorPage = () => {
-    const [formData, setFormData] = useState<FormDataType>(initialFormData)
-
-    const navigate = useNavigate();
+const UpdateProfessor = ({ onClick, professor, Alert }: Props) => {
+    const [formData, setFormData] = useState<PorfessorDataType>(professor)
 
     // Form submit
     const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const id = formData._id;
 
         try {
-            const response = await MainAPI.post('/professores/create', formData);
+            const message = 'O professor foi atualizado com sucesso!'
+            const status = true;
+            const type = 'success';
+            // const response = await MainAPI.put(`/professores/update/${id}`, formData);
+            Alert(message, status, type)
 
-            if (response) {
-                setFormData({
-                    name: { first: '', last: '' },
-                    birthday: '',
-                    email: '',
-                    telephone: { primary: '', secound: '' },
-                    nationality: '',
-                    startDate: '',
-                    address: '',
-                    gender: '',
-                    status: ''
-                })
-            }
-
-            return response;
-
+            // return response;
         } catch (error) {
-            console.error("Houve um erro ao cadastrar professor!", error);
+            console.error("Houve um erro ao autalizar o professor!", error);
         }
     }
-
-
     return (
-        <CustomContainer style="p-3" >
-            <Typography className="!text-lg !mb-4 !font-bold">Cadastrar Professor</Typography>
+        <CustomForm onSubmit={handleFormSubmit} >
+            <AppBar sx={{ position: 'relative' }} className="!bg-white/50 backdrop-blur-sm ">
+                <Toolbar>
+                    <Box sx={{
+                        display: 'flex',
+                        width: '100%',
+                        justifyContent: 'space-between'
+                    }}>
+                        <Button onClick={onClick} className="!block">Voltar</Button>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            onClick={onClick}
+                            className=""
+                            startIcon={<SaveIcon />}
+                        >
+                            Salvar
+                        </Button>
+                    </Box>
+                </Toolbar>
+            </AppBar>
 
-            <Box>
-                <Breadcrumbs aria-label="breadcrumb" className="!text-sm">
-                    <Link underline="hover" color="inherit" href="/">
-                        Home
-                    </Link>
-
-                    <Link underline="hover" color="inherit" href="/professores">
-                        Professores
-                    </Link>
-
-                    <Link underline="none" color="primary">
-                        Novo Professor
-                    </Link>
-                </Breadcrumbs>
-                <Button
-                    variant="outlined"
-                    startIcon={<ListAltIcon />}
-                    className="!text-green-600 !text-xs !border-green-600 !mt-4"
-                    onClick={() => navigate('/professores')}
-                >
-                    Lista de Professores
-                </Button>
-            </Box>
-
-            <form onSubmit={handleFormSubmit} className="mt-4" >
+            <div className="mt-4 p-2">
                 <div className="w-full h-24 bg-white shadow-sm rounded-lg flex items-center pl-4 ">
                     <div className="flex flex-col items-center gap-y-1" >
                         <div className="rounded-full bg-gray-200 w-14 h-14 flex items-center justify-center p-1">
@@ -115,10 +90,10 @@ const NewProfessorPage = () => {
                         <TextField
                             label="Primeiro nome"
                             type="text"
-                            value={formData.name.first}
                             variant="standard"
                             fullWidth
-                            className="!mb-4"
+                            value={formData?.name.first}
+                            className="!mb-4 !border-b-green-500"
                             onChange={(e) => setFormData({
                                 ...formData,
                                 name: {
@@ -126,14 +101,15 @@ const NewProfessorPage = () => {
                                     last: formData?.name.last
                                 }
                             })}
+
                         />
                         {/* Last */}
                         <TextField
                             label="Último nome"
                             type="text"
-                            value={formData.name.last}
                             variant="standard"
                             fullWidth
+                            value={formData?.name.last}
                             onChange={(e) => setFormData({
                                 ...formData,
                                 name: {
@@ -152,7 +128,7 @@ const NewProfessorPage = () => {
                             type="text"
                             variant="standard"
                             fullWidth
-                            value={formData.email}
+                            value={formData?.email}
                             onChange={(e) => setFormData({
                                 ...formData,
                                 email: e.target.value
@@ -167,7 +143,7 @@ const NewProfessorPage = () => {
                             label="Nacionalidade"
                             variant="standard"
                             fullWidth
-                            value={formData.nationality}
+                            value={formData?.nationality}
                             onChange={(e) => setFormData({ ...formData, nationality: e.target.value })}
                         />
                     </div>
@@ -179,7 +155,7 @@ const NewProfessorPage = () => {
                             label="Endereço"
                             fullWidth
                             variant="standard"
-                            value={formData.address}
+                            value={formData?.address}
                             onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                         />
                     </div>
@@ -191,7 +167,7 @@ const NewProfessorPage = () => {
                             label="Telefone"
                             fullWidth
                             variant="standard"
-                            value={formData.telephone.primary}
+                            value={formData?.telephone.primary}
                             onChange={(e) => setFormData({
                                 ...formData,
                                 telephone: {
@@ -206,7 +182,7 @@ const NewProfessorPage = () => {
                             label="Telefone alternativo"
                             fullWidth
                             variant="standard"
-                            value={formData.telephone.secound}
+                            value={formData?.telephone.secound}
                             onChange={(e) => setFormData({
                                 ...formData,
                                 telephone: {
@@ -224,9 +200,8 @@ const NewProfessorPage = () => {
                             <TextField
                                 type="date"
                                 variant="standard"
-                                value={formData.birthday}
+                                value={formData?.birthday}
                                 onChange={(e) => setFormData({ ...formData, birthday: e.target.value })}
-
                             />
                         </div>
                         {/* Date that started working */}
@@ -235,7 +210,7 @@ const NewProfessorPage = () => {
                             <TextField
                                 type="date"
                                 variant="standard"
-                                value={formData.startDate}
+                                value={formData?.startDate}
                                 onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
                             />
                         </div>
@@ -247,7 +222,7 @@ const NewProfessorPage = () => {
                         <FormLabel className="">Gênero </FormLabel>
                         <RadioGroup
                             row
-                            value={formData.gender}
+                            value={formData?.gender}
                             onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                         >
                             <FormControlLabel value="Masculino" control={<Radio />} label="Maculino" />
@@ -262,7 +237,7 @@ const NewProfessorPage = () => {
                             label="Estado"
                             variant="standard"
                             fullWidth
-                            value={formData.status}
+                            value={formData?.status}
                             onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                         >
                             <MenuItem value={'Ativo'}>Ativo</MenuItem>
@@ -273,17 +248,9 @@ const NewProfessorPage = () => {
 
                 </div>
 
-                <div className="w-full flex justify-end mt-5 mb-10">
-                    <Button
-                        variant="contained"
-                        type="submit"
-                    >
-                        Cadastrar
-                    </Button>
-                </div>
-            </form>
-        </CustomContainer>
+            </div>
+        </CustomForm>
     )
 }
 
-export default NewProfessorPage;
+export default UpdateProfessor

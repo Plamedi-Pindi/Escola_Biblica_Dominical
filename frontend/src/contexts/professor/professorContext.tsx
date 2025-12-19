@@ -5,10 +5,13 @@ import type { PorfessorDataType } from '../../types/professor/ProfessorTypes';
 
 /** #################### Tipagens ######################### */
 type MyContextType = [
-    allProfessorsData: PorfessorDataType[]
+    allProfessorsData: PorfessorDataType[],
+    findOneProfessor: (id: string) => Promise<PorfessorDataType>,
+    handleAlertMessage: (text: string, status: boolean, type: string) => void,
+    Alert: {message: string, status: boolean, type: string}
 ]
 type ProfessorContextType = {
-    children: ReactNode
+    children: ReactNode,
 }
 
 // Create a context
@@ -19,6 +22,12 @@ const MyContext = createContext<MyContextType | undefined>(undefined)
 const ProfessorContext = ({ children }: ProfessorContextType) => {
     // ####################### States ############################ 
     const [allProfessorsData, setAllProfessorsData] = useState<PorfessorDataType[]>([])
+    const [Alert, setAlert] = useState({
+        status: false,
+        message: '',
+        type: ''
+    });
+
 
     // Function to fetch professores from database
     useEffect(() => {
@@ -34,9 +43,26 @@ const ProfessorContext = ({ children }: ProfessorContextType) => {
         }
     }, []);
 
+    const findOneProfessor = async (id: string) => {
+        try {
+            const result = await MainAPI.get(`/professores/find/${id}`)
+            return result.data;
+        } catch (error) {
+            console.error('Houve um erro ao pesquisar um professor', error);
+
+        }
+    }
+
+    const handleAlertMessage = (text: string, status: boolean, type: string) => {
+        setAlert({ status: status, message: text, type: type });
+
+        setInterval(() => {
+            setAlert({ status: false, message: '', type: '' })
+        }, 3000);
+    }
 
     return (
-        <MyContext value={[allProfessorsData]}>
+        <MyContext value={[allProfessorsData, findOneProfessor, handleAlertMessage, Alert ]}>
             {children}
         </MyContext>
     )

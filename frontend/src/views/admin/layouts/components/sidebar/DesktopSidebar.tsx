@@ -204,7 +204,8 @@ const DesktopSidebar = ({ handleDrawerClose, open }: DesktopSidebarType) => {
                             {/* Sub-Item para  Dados Estatístico  */}
                             <SublistItems title='Dados estatístico' margin={' mt-4'} />
                             <Box component={'div'} className="border-l border-gray-200 ml-7 -mt-1 pt-4">
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} />
+                                <ItemForList route={''} title={'Dados de Alunos'} />
+                                <ItemForList route={''} title={'Dados de Professores'} />
                             </Box>
 
                             {/* Sub-Item para Novos Dados  */}

@@ -4,7 +4,7 @@ import type { ReactNode } from "react"
 
 type CustomFormProps = {
     children: ReactNode,
-    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+    onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void
 };
 
 

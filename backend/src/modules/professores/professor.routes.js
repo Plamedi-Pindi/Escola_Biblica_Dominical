@@ -12,4 +12,6 @@ module.exports = async (fastify) => {
     fastify.get('/find/:id', ProfessorController.findOne);
     // 
     fastify.delete('/remove/:id', ProfessorController.deleteOne);
+    // 
+    fastify.put('/update/:id', ProfessorController.updateOneProfessor);
 }
