@@ -15,9 +15,9 @@ const HomePage = () => {
                 {/* Professores */}
                 <CardCompont
                     style={' col-span-1 '}
-                    background={'!bg-violet-100'}
+                    background={'!bg-violet-50'}
                     cardIcon={<SchoolOutlinedIcon className="text-sky-600" />}
-                    cardBG={'bg-sky-500/30 '}
+                    cardBG={'bg-sky-500/20 '}
                     mainText={'30'}
                     secText={'Monitores'}
                     optionalIcon={<CallMadeOutlinedIcon className="!w-4 !h-3.5 " />}
@@ -28,9 +28,9 @@ const HomePage = () => {
                 {/* Alunos */}
                 <CardCompont
                     style={' col-span-1 '}
-                    background={'!bg-violet-100'}
+                    background={'!bg-violet-50'}
                     cardIcon={<GroupAddOutlinedIcon className="text-yellow-600" />}
-                    cardBG={'bg-yellow-500/30 '}
+                    cardBG={'bg-yellow-500/20 '}
                     mainText={'1200'}
                     secText={'Alunos'}
                     optionalIcon={<CallReceivedOutlinedIcon className="!w-4 !h-3.5" />}
@@ -41,9 +41,9 @@ const HomePage = () => {
                 {/* Licoes */}
                 <CardCompont
                     style={' col-span-1 '}
-                    background={'!bg-violet-100'}
+                    background={'!bg-violet-50'}
                     cardIcon={<TopicOutlinedIcon className="text-lime-600" />}
-                    cardBG={'bg-lime-500/30 '}
+                    cardBG={'bg-lime-500/20 '}
                     mainText={'09'}
                     secText={'Lições'}
                     optionalIcon={<CallMadeOutlinedIcon className="!w-4 !h-3.5" />}
@@ -53,9 +53,9 @@ const HomePage = () => {
                 />
                 <CardCompont
                     style={' col-span-1 '}
-                    background={'!bg-violet-100'}
+                    background={'!bg-violet-50'}
                     cardIcon={<EmojiEventsOutlinedIcon className="text-fuchsia-600" />}
-                    cardBG={'bg-fuchsia-500/30 '}
+                    cardBG={'bg-fuchsia-500/20 '}
                     mainText={'10'}
                     secText={'Eventos'}
                     optionalIcon={<CallReceivedOutlinedIcon className="!w-4 !h-3.5" />}
