@@ -63,8 +63,9 @@ const ProfessorPage = () => {
     const [
         allProfessorsData,
         findOneProfessor,
-        handleAlertMessage, 
-        Alert
+        handleAlertMessage,
+        Alert,
+        setAllProfessorsData
     ] = useProfessorContext()
     // const dataActual = new Date().getFullYear();
 
@@ -76,7 +77,7 @@ const ProfessorPage = () => {
             name: `${professor.name.first} ${professor.name.last}`,
             email: professor.email,
             telephone: professor.telephone.primary,
-            idade: professor.birthday,
+            idade: professor.birthday && professor.birthday.split("T")[0],
             gender: professor.gender,
             status: professor.status
         }
@@ -148,7 +149,7 @@ const ProfessorPage = () => {
                     {/* Button to update file */}
                     <EditButton onClick={() => handleOpenUpdateDialog(props.row.id)} />
                     {/* Button to view file details */}
-                    <ViewButton onClick={()=> handleAlertMessage('ola', true, 'success')} />
+                    <ViewButton onClick={() => handleAlertMessage('ola', true, 'success')} />
                     {/* Button to delete file */}
                     <DeleteButton onClick={() => handleDelete(props.row.id)} />
                 </Stack>
@@ -160,8 +161,10 @@ const ProfessorPage = () => {
     const handleDelete = async (id: string) => {
         try {
             const response = await MainAPI.delete(`/professores/remove/${id}`);
-            console.log(response);
-
+            setAllProfessorsData(prev =>
+                prev.filter(professor => professor._id !== id)
+            )
+            return response
         } catch (error) {
             console.error('Erro ao eliminar um professore!', error);
         }
@@ -199,15 +202,7 @@ const ProfessorPage = () => {
             />
 
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                {/* <Breadcrumbs aria-label="breadcrumb" className="!text-sm">
-                    <Link underline="hover" color="inherit" href="/">
-                        Home
-                        </Link>
 
-                        <Link underline="hover" color="primary" href="/professores">
-                        Professores
-                        </Link>
-                        </Breadcrumbs> */}
                 <Typography className='!text-lg  !font-bold'>Professores</Typography>
 
                 <Button

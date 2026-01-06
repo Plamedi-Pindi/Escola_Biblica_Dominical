@@ -11,7 +11,7 @@ exports.getAllProfessores = async () => {
         throw new Error("Nenhum professor foi encontrado!")
     }
 
-    return result;
+    return result; 
 }
 
 // 

@@ -16,12 +16,14 @@ import InputLabel from "@mui/material/InputLabel";
 // Icons
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import SaveIcon from '@mui/icons-material/Save';
 
 import CustomContainer from "../../../../components/Container/Container";
 import { useState, type FormEvent } from "react";
 import type { FormDataType } from "../../../../types/professor/ProfessorTypes";
 import MainAPI from "../../../../services/apis/MainAPI";
 import { useNavigate } from "react-router-dom";
+import { useProfessorContext } from "../../../../contexts/professor/professorContext";
 
 
 const initialFormData = {
@@ -39,6 +41,7 @@ const initialFormData = {
 const NewProfessorPage = () => {
     const [formData, setFormData] = useState<FormDataType>(initialFormData)
 
+    const [, , , , setAllProfessorsData] = useProfessorContext()
     const navigate = useNavigate();
 
     // Form submit
@@ -47,7 +50,6 @@ const NewProfessorPage = () => {
 
         try {
             const response = await MainAPI.post('/professores/create', formData);
-
             if (response) {
                 setFormData({
                     name: { first: '', last: '' },
@@ -62,6 +64,7 @@ const NewProfessorPage = () => {
                 })
             }
 
+            setAllProfessorsData(prev => [...prev, response.data])
             return response;
 
         } catch (error) {
@@ -71,7 +74,7 @@ const NewProfessorPage = () => {
 
 
     return (
-        <CustomContainer style="p-3" >
+        <CustomContainer style="pt-3 " >
             <Typography className="!text-lg !mb-4 !font-bold">Cadastrar Professor</Typography>
 
             <Box>
@@ -98,7 +101,7 @@ const NewProfessorPage = () => {
                 </Button>
             </Box>
 
-            <form onSubmit={handleFormSubmit} className="mt-4" >
+            <form onSubmit={handleFormSubmit} className="mt-4 "  >
                 <div className="w-full h-24 bg-white shadow-sm rounded-lg flex items-center pl-4 ">
                     <div className="flex flex-col items-center gap-y-1" >
                         <div className="rounded-full bg-gray-200 w-14 h-14 flex items-center justify-center p-1">
@@ -277,6 +280,7 @@ const NewProfessorPage = () => {
                     <Button
                         variant="contained"
                         type="submit"
+                        startIcon={<SaveIcon />}
                     >
                         Cadastrar
                     </Button>

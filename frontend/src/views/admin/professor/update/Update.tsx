@@ -21,6 +21,7 @@ import CustomForm from "../../../../components/Form/CustomForm"
 import type { PorfessorDataType } from "../../../../types/professor/ProfessorTypes"
 import { useState, type FormEvent } from "react"
 import MainAPI from "../../../../services/apis/MainAPI"
+import { useProfessorContext } from "../../../../contexts/professor/professorContext"
 
 type Props = {
     onClick: () => void
@@ -30,6 +31,8 @@ type Props = {
 
 const UpdateProfessor = ({ onClick, professor, Alert }: Props) => {
     const [formData, setFormData] = useState<PorfessorDataType>(professor)
+
+    const [, , , , setAllProfessorsData] = useProfessorContext()
 
     // Form submit
     const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -43,11 +46,19 @@ const UpdateProfessor = ({ onClick, professor, Alert }: Props) => {
             const response = await MainAPI.put(`/professores/update/${id}`, formData);
             Alert(message, status, type)
 
+            setAllProfessorsData(prev =>
+                
+                prev.map(item =>
+                    item._id === id ? response.data : item
+                )
+            )
+
             return response;
         } catch (error) {
             console.error("Houve um erro ao autalizar o professor!", error);
         }
     }
+
     return (
         <CustomForm onSubmit={handleFormSubmit} >
             <AppBar sx={{ position: 'relative' }} className="!bg-white/50 backdrop-blur-sm ">

@@ -11,7 +11,7 @@ exports.getAll = async (req, reply) => {
         return reply.code(400).send({ error: error.message })
     }
 }
-
+ 
 // 
 exports.deleteOne = async (req, reply) => {
     try {

@@ -2,13 +2,15 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import MainAPI from '../../services/apis/MainAPI';
 import type { PorfessorDataType } from '../../types/professor/ProfessorTypes';
+import type { Dispatch, SetStateAction } from 'react';
 
 /** #################### Tipagens ######################### */
 type MyContextType = [
     allProfessorsData: PorfessorDataType[],
     findOneProfessor: (id: string) => Promise<PorfessorDataType>,
     handleAlertMessage: (text: string, status: boolean, type: string) => void,
-    Alert: {message: string, status: boolean, type: string}
+    Alert: {message: string, status: boolean, type: string},
+    setAllProfessorsData: Dispatch<SetStateAction<PorfessorDataType[]>>
 ]
 type ProfessorContextType = {
     children: ReactNode,
@@ -62,7 +64,7 @@ const ProfessorContext = ({ children }: ProfessorContextType) => {
     }
 
     return (
-        <MyContext value={[allProfessorsData, findOneProfessor, handleAlertMessage, Alert ]}>
+        <MyContext value={[allProfessorsData, findOneProfessor, handleAlertMessage, Alert, setAllProfessorsData ]}>
             {children}
         </MyContext>
     )

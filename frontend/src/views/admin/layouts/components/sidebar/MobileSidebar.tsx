@@ -54,7 +54,7 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
         <Box sx={{ width: '19rem' }} onClick={onClick} >
             <Box sx={{ display: "flex", alignItems: "center", justifyContent: 'space-between' }}>
                 <IconButton>
-                    <Avatar  />
+                    <Avatar />
                 </IconButton>
                 <Typography color="info">EBD Sião</Typography>
                 <IconButton onClick={closeSidebar}>
@@ -66,20 +66,20 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
             <Divider />
 
             {/* Nav */}
-            <nav aria-label="">
+            <nav aria-label=""> 
                 <List>
                     {/* Home */}
-                    <ListItemButton >
-                        <ListItemIcon sx={{ minWidth: 35 }}>
-                            <GridView className="!text-xl" color="info" />
-                        </ListItemIcon>
-                        <Ancora to={'/'}>
+                    <Ancora to={'/'} >
+                        <ListItemButton onClick={closeSidebar}>
+                            <ListItemIcon sx={{ minWidth: 35 }}>
+                                <GridView className="!text-xl" color="info" />
+                            </ListItemIcon>
                             <ListItemText
                                 primary="Home"
                                 slotProps={{ primary: { sx: { fontSize: 16 } } }}
                             />
-                        </Ancora>
-                    </ListItemButton>
+                        </ListItemButton>
+                    </Ancora>
 
                     {/* Admin */}
                     <ListItemButton onClick={handleAdministracaoClick}>
@@ -94,15 +94,21 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                         <List className="!p-0  " >
                             <Box component={'div'} className="border-l ml-7">
                                 {/* items */}
-                                <ItemForList route={'/allusers'} title={'Lista de Usuários'} onClick={closeSidebar} />
-                                <ItemForList route={'/newuser'} title={'Lista de Professores'} onClick={closeSidebar} />
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar} />
+                                <ItemForList route={'/anolectivo'} title={'Anos Lectivos'} onClick={closeSidebar} />
+                                <ItemForList route={'/turmas'} title={'Lista de Turmas'} onClick={closeSidebar} />
                             </Box>
 
                             {/* Sub-Item para  Dados Estatístico  */}
                             <SublistItems title='Dados estatístico' margin={'ml-[1.45rem] mt-4'} />
                             <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
                                 <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar} />
+                            </Box>
+
+                            {/* Sub-Item para  Novos Dados  */}
+                            <SublistItems title='Novos Dados' margin={'ml-[1.45rem] mt-4'} />
+                            <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
+                                <ItemForList route={'/anolectivo/novoanolectivo'} title={'Criar Ano Lectivo'} onClick={closeSidebar} />
+                                <ItemForList route={'/newuser'} title={'Criar Turma'} onClick={closeSidebar} />
                             </Box>
                         </List>
                     </Collapse>
@@ -122,7 +128,7 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                                 {/* items */}
                                 <ItemForList route={'/allusers'} title={'Lista de Usuários'} onClick={closeSidebar} />
                                 <ItemForList route={'/professores'} title={'Lista de Professores'} onClick={closeSidebar} />
-                                <ItemForList route={'/newuser'} title={'Lista de Alunos'} onClick={closeSidebar} />
+                                <ItemForList route={'/alunos'} title={'Lista de Alunos'} onClick={closeSidebar} />
                             </Box>
 
                             {/* Sub-Item para  Dados Estatístico  */}
@@ -137,6 +143,7 @@ const MobileSidebar = ({ onClick, closeSidebar }: SidebarProps) => {
                             <Box component={'div'} className="border-l ml-7 -mt-1 pt-4">
                                 <ItemForList route={'/newuser'} title={'Cadastrar Usuário'} onClick={closeSidebar} />
                                 <ItemForList route={'/newProfesser'} title={'Cadastrar Professor'} onClick={closeSidebar} />
+                                <ItemForList route={'/alunos/novoaluno'} title={'Cadastrar Aluno'} onClick={closeSidebar} />
                             </Box>
                         </List>
                     </Collapse>
@@ -252,17 +259,17 @@ type ItemForListType = {
 
 const ItemForList = ({ title, route, onClick }: ItemForListType) => {
     return (
-        <ListItem className="!pt-0 !pb-0 ">
-            <ListItemButton className="!pb-0 !pt-0" onClick={onClick}>
-                <Ancora to={`${route}`}>
+        <Ancora to={`${route}`}>
+            <ListItem className="!pt-0 !pb-0 ">
+                <ListItemButton className="!pb-0 !pt-0" onClick={onClick}>
                     <ListItemText
                         primary={title}
                         slotProps={{
                             primary: { sx: { fontSize: 15 } }
                         }}
                     />
-                </Ancora>
-            </ListItemButton>
-        </ListItem>
+                </ListItemButton>
+            </ListItem>
+        </Ancora>
     )
 }
