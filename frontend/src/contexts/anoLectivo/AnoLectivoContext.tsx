@@ -11,8 +11,9 @@ type AnoLectivoType = {
 
 type ContextType = [
     anoLectivos: AnoLectivoType[],
-    findYear: (id: string) => Promise<AnoLectivoType> ,
-    setAnoLectivos: Dispatch<SetStateAction<AnoLectivoType[]>>
+    findYear: (id: String) => Promise<AnoLectivoType> ,
+    setAnoLectivos: Dispatch<SetStateAction<AnoLectivoType[]>>,
+    findYearName: (id: String) => Promise<String> ,
 ]
 
 type Props = {
@@ -38,7 +39,7 @@ const AnoLectivoContext = ({ children }: Props) => {
         fetchAnoLectivo()
     }, [])
 
-    const findYear = async (id: string) => {
+    const findYear = async (id: String) => {
         try {
             const response = await MainAPI.get(`/anoLectivo/searchone/${id}`);
             return response.data;
@@ -47,8 +48,17 @@ const AnoLectivoContext = ({ children }: Props) => {
         }
     }
 
+    const findYearName = async (id: String) => {
+        try {
+            const response = await MainAPI.get(`/anoLectivo/searchone/${id}`);
+            return response.data.name;
+        } catch (error) {
+            console.error('Erro ao buscar um ano', error);
+        }
+    }
+
     return (
-        <AnoContext value={[anoLectivos, findYear, setAnoLectivos]}>
+        <AnoContext value={[anoLectivos, findYear, setAnoLectivos, findYearName]}>
             {children}
         </AnoContext>
     )

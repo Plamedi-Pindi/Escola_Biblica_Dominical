@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import Modal from "@mui/material/Modal";
 
 // Icon
 import AddIcon from '@mui/icons-material/AddCircleOutline';
@@ -17,19 +18,35 @@ import CustomContainer from "../../../components/Container/Container";
 import EditButton from "../../../components/Buttons/EditButton";
 import ViewButton from "../../../components/Buttons/ViewButton";
 import DeleteButton from "../../../components/Buttons/DeleteButton";
-import { useNavigate } from "react-router-dom";
+import NewClassPage from "./register/NewClass";
+import { useMemo, useState } from "react";
+import { useTurmaContext } from "../../../contexts/turma/TurmaContext";
+import { useAnoLectivoContext } from "../../../contexts/anoLectivo/AnoLectivoContext";
+import MainAPI from "../../../services/apis/MainAPI";
 
 
 const TurmasPage = () => {
+    const [isNewClassModal, setIsNewClassModal] = useState(false);
 
-    const rows: GridRowsProp = [
-        { id: 1, name: '2025_Jardins 1', anoLectivo: '2025' },
-        { id: 2, name: '2025_Jardins 2', anoLectivo: '2025' },
-        { id: 3, name: '2025_Novice 1', anoLectivo: '2025' },
-        { id: 4, name: '2025_Novice 2', anoLectivo: '2025' },
-        { id: 5, name: '2025_Cates ', anoLectivo: '2025' },
-        { id: 6, name: '2025_Primo-Júnior ', anoLectivo: '2025' },
-    ]
+    const [turmas, setTurmas] = useTurmaContext(); // Contexto do componente Turma
+    const [anoLectivos] = useAnoLectivoContext(); // Contexto do componente Ano Lectivo
+
+
+    // 
+    const openNewClassModal = () => setIsNewClassModal(true)
+    // 
+    const closeNewClassModal = () => setIsNewClassModal(false)
+
+    const rows: GridRowsProp = useMemo(() => (
+        turmas.map(turma => (
+            {
+                id: turma._id,
+                name: turma.name,
+                anoLectivo: anoLectivos.filter(item => item._id === turma.anoLectivo)[0]?.name ?? '---',
+            }
+        ))
+    ), [turmas, anoLectivos])
+
 
 
     const columns: GridColDef[] = [
@@ -40,20 +57,27 @@ const TurmasPage = () => {
             field: 'action',
             headerName: 'Ações',
             width: 220,
-            renderCell: () => (
+            renderCell: (params) => (
                 <Stack spacing={1} direction={'row'}>
                     {/* Button to update file */}
                     <EditButton />
                     {/* Button to view file details */}
                     <ViewButton />
                     {/* Button to delete file */}
-                    <DeleteButton />
+                    <DeleteButton onClick={()=>handleDelete(params.row.id)} />
                 </Stack>
             ),
         },
     ]
 
-    const navigate = useNavigate();
+      // Delete 
+    const handleDelete = async (id: String) => {
+        const response = await MainAPI.get(`turma/delete/${id}`)
+        setTurmas(prev =>
+            prev.filter(turma => turma._id !== id)
+        )
+        return response.status
+    }
 
     return (
         <CustomContainer>
@@ -65,7 +89,7 @@ const TurmasPage = () => {
                     variant="contained"
                     startIcon={<AddIcon />}
                     className=" !text-xs  "
-                    onClick={() => navigate('/newProfesser')}
+                    onClick={openNewClassModal}
                 >
                     Nova Turma
                 </Button>
@@ -81,6 +105,14 @@ const TurmasPage = () => {
                     showToolbar
                 />
             </div>
+
+            {/*  */}
+            <Modal
+                open={isNewClassModal}
+                onClose={closeNewClassModal}
+            >
+                <NewClassPage closeModal={closeNewClassModal} />
+            </Modal>
         </CustomContainer>
     )
 }

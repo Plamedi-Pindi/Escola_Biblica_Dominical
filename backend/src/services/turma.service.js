@@ -16,12 +16,7 @@ exports.getAllTurma = async () => {
 // create turma
 exports.createTurma = async (data) => {
     const turma = await new Turma(data);
-
-    if (!turma) {
-        throw new Error("Erro ao criar uma turma!")
-    }
-
-    return turma
+    return turma.save();
 }
 
 // update turma

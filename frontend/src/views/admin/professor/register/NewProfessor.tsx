@@ -74,7 +74,7 @@ const NewProfessorPage = () => {
 
 
     return (
-        <CustomContainer style="pt-3 " >
+        <CustomContainer style="pt-3 pb-3" >
             <Typography className="!text-lg !mb-4 !font-bold">Cadastrar Professor</Typography>
 
             <Box>
@@ -276,7 +276,7 @@ const NewProfessorPage = () => {
 
                 </div>
 
-                <div className="w-full flex justify-end mt-5 mb-10">
+                <div className="w-full flex justify-end mt-5 ">
                     <Button
                         variant="contained"
                         type="submit"

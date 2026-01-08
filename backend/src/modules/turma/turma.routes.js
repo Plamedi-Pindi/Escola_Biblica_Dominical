@@ -10,7 +10,7 @@ module.exports = async (fastify) => {
     // 
     fastify.put('/update/:id', TurmaController.update)
     // 
-    fastify.put('/search/:id', TurmaController.update)
+    fastify.get('/search/:id', TurmaController.update)
     // 
-    fastify.put('/delete/:id', TurmaController.update)
+    fastify.get('/delete/:id', TurmaController.update)
 }

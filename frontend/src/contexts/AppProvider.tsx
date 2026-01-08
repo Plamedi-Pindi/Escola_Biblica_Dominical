@@ -4,6 +4,7 @@ import ProfessorContext from "./professor/professorContext"
 import UserContext from "./user/UserContext"
 import AnoLectivoContext from "./anoLectivo/AnoLectivoContext"
 import type { ReactNode } from "react"
+import TurmaContext from "./turma/TurmaContext"
 
 type AppProviderType = {
     children: ReactNode
@@ -12,17 +13,19 @@ type AppProviderType = {
 const AppProvider = ({ children }: AppProviderType) => {
     return (
         <>
-            <AnoLectivoContext>
-                <HeaderContext>
-                    <SidebarContext>
-                        <ProfessorContext>
-                            <UserContext>
-                                {children}
-                            </UserContext>
-                        </ProfessorContext>
-                    </SidebarContext>
-                </HeaderContext>
-            </AnoLectivoContext>
+            <TurmaContext>
+                <AnoLectivoContext>
+                    <HeaderContext>
+                        <SidebarContext>
+                            <ProfessorContext>
+                                <UserContext>
+                                    {children}
+                                </UserContext>
+                            </ProfessorContext>
+                        </SidebarContext>
+                    </HeaderContext>
+                </AnoLectivoContext>
+            </TurmaContext>
         </>
     )
 }
