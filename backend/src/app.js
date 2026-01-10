@@ -27,7 +27,7 @@ module.exports = async function (fastify, opts) {
 
   // Middlewares globais
   fastify.register(cors, {
-    origin: [env.FRONT_HOST],
+    origin: ['https://escola-biblica-dominical.vercel.app/anolectivo'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   });
 
