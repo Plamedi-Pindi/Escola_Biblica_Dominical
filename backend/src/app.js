@@ -3,17 +3,32 @@
 const path = require('node:path')
 const AutoLoad = require('@fastify/autoload')
 const cors = require("@fastify/cors");
+const env = require("./config/env");
 
 // Pass --options via CLI arguments in command to enable these options.
 const options = {}
 
+
+
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
 
+  logger: {
+    level: process.env.NODE_ENV === 'production' ? 'info' : 'debug'
+    ransport: process.env.NODE_ENV !== 'production' ? {
+      target: 'pino-pretty',
+      options: {
+        colorize: true,
+        translateTime: 'HH:MM:ss',
+        ignore: 'pid,hostname'
+      }
+    } : undefined
+  }
+
   // Middlewares globais
   fastify.register(cors, {
-    origin: ['http://localhost:5173'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+    origin: [env.FRONT_HOST],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   });
 
 

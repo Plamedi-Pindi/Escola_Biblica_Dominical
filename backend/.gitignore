@@ -56,3 +56,8 @@ profile-*
 profile*
 *clinic*
 *flamegraph*
+
+# ambientes
+.env
+.env.*
+!.env.example
