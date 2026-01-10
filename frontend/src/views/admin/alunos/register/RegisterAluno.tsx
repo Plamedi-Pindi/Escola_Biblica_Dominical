@@ -8,7 +8,6 @@ import FormLabel from "@mui/material/FormLabel";
 import CustomContainer from "../../../../components/Container/Container";
 import CustomForm from "../../../../components/Form/CustomForm";
 import MainAPI from "../../../../services/apis/MainAPI";
-import { useNavigate } from "react-router-dom";
 import { useState, type FormEvent } from "react";
 
 type FromType = {
@@ -19,7 +18,6 @@ type FromType = {
 const NewAlunoComponent = () => {
     const [formData, setFormData] = useState<FromType>({ name: '', initDate: '', endtDate: '' });
 
-    const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
