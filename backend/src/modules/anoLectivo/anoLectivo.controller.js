@@ -18,7 +18,7 @@ exports.create = async (req, reply) => {
         const data = req.body;
         const result = await AnoLectivoSevices.createYears(data);
         // const result = data
-        return reply.code(200).send(result);
+        return reply.code(201).send(result);
     } catch (error) {
         return reply.code(400).send({ message: "erro ao criar um ano", error: error })
     }

@@ -2,7 +2,7 @@
 
 const path = require('node:path')
 const AutoLoad = require('@fastify/autoload')
-const cors = require("@fastify/cors");
+// const cors = require("@fastify/cors");
 const env = require("./config/env");
 
 // Pass --options via CLI arguments in command to enable these options.
@@ -26,11 +26,11 @@ module.exports = async function (fastify, opts) {
   }
 
   // Middlewares globais
-  fastify.register(cors, {
-    origin: ['https://escola-biblica-dominical.vercel.app'],
-    // origin: ['http://localhost:5173'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  });
+  // fastify.register(cors, {
+  //   origin: ['https://escola-biblica-dominical.vercel.app'],
+  //   // origin: ['http://localhost:5173'],
+  //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  // });
 
 
   // those should be support plugins that are reused
