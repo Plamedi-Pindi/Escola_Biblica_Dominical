@@ -25,7 +25,7 @@ exports.create = async (req, reply) => {
         }
 
         const result = await UserService.create(data);  // Cria um novo usario
-        return reply.code(201).send(result);
+        return reply.code(200).send(result);
     } catch (error) {
         return reply.code(400).send({ error: error.message })
     }

@@ -6,7 +6,7 @@ const AnoLectivoSevices = require('../../services/anoLectivo.service');
 exports.getAll = async (req, reply) => {
     try {
         const result = await AnoLectivoSevices.getAllYears();
-        return reply.code(201).send(result);
+        return reply.code(200).send(result);
     } catch (error) {
         return reply.code(400).send({ error: error.message })
     }
@@ -18,7 +18,7 @@ exports.create = async (req, reply) => {
         const data = req.body;
         const result = await AnoLectivoSevices.createYears(data);
         // const result = data
-        return reply.code(201).send(result);
+        return reply.code(200).send(result);
     } catch (error) {
         return reply.code(400).send({ message: "erro ao criar um ano", error: error })
     }
@@ -29,7 +29,7 @@ exports.delete = async (req, reply) => {
     try {
         const id = req.params.id
         const result = await AnoLectivoSevices.deleteYear(id);
-        return reply.code(201).send(result);
+        return reply.code(200).send(result);
     } catch (error) {
         return reply.code(400).send({ message: "erro ao eliminar um ano", error: error })
     }
@@ -52,7 +52,7 @@ exports.update = async (req, reply) => {
         const id = req.params.id
         const data = req.body;
         const result = await AnoLectivoSevices.updateYear(id, data);
-        return reply.code(201).send(data);
+        return reply.code(200).send(data);
     } catch (error) {
         return reply.code(400).send({ message: "erro ao atualizar um ano", error: error })
     }
