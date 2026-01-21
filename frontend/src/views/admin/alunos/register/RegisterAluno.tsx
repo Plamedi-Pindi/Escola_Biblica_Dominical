@@ -43,6 +43,10 @@ const NewAlunoComponent = () => {
     const [formData, setFormData] = useState<FormDataType>(initialData);
     const navigate = useNavigate();
 
+    const handleSubmit = () => {
+        setFormData(initialData)
+    }
+
     return (
         <CustomContainer style="pt-3 pb-3">
             <Typography className="!text-lg !mb-4 !font-bold">Cadastrar Alunos</Typography>
@@ -71,7 +75,7 @@ const NewAlunoComponent = () => {
                 </Button>
             </Box>
 
-            <form className="mt-4 "  >
+            <form onSubmit={handleSubmit} className="mt-4 "  >
                 <div className="w-full h-24 bg-white shadow-sm rounded-lg flex items-center pl-4 ">
                     <div className="flex flex-col items-center gap-y-1" >
                         <div className="rounded-full bg-gray-200 w-14 h-14 flex items-center justify-center p-1">
