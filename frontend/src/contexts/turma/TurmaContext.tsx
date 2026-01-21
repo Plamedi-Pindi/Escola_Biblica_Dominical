@@ -3,8 +3,9 @@ import MainAPI from "../../services/apis/MainAPI";
 import type { Dispatch, SetStateAction } from "react";
 
 type MyContextType = [
-    turmas: TurmaType[] , 
-    setTurmas: Dispatch<SetStateAction<TurmaType[]>>
+    turmas: TurmaType[],
+    setTurmas: Dispatch<SetStateAction<TurmaType[]>>,
+    findTurma: (id: String) => Promise<TurmaType>
 ]
 
 type TurmaType = {
@@ -39,8 +40,18 @@ const TurmaContext = ({ children }: props) => {
         }
     }, []);
 
+    // 
+    const findTurma = async (id: String) => {
+        try {
+            const response = await MainAPI.get(`/turma/search/${id}`)
+            return response.data
+        } catch (error) {
+            console.error('Erro ao pesquisar uma class', error);
+        }
+    }
+
     return (
-        <MyContext value={[turmas, setTurmas]}>
+        <MyContext value={[turmas, setTurmas, findTurma]}>
             {children}
         </MyContext>
     )

@@ -209,7 +209,7 @@ const ProfessorPage = () => {
                     variant="contained"
                     startIcon={<AddIcon />}
                     className=" !text-xs  "
-                    onClick={() => navigate('/newProfesser')}
+                    onClick={() => navigate('/professores/newProfesser')}
                 >
                     Novo Profesor
                 </Button>

@@ -19,23 +19,50 @@ import EditButton from "../../../components/Buttons/EditButton";
 import ViewButton from "../../../components/Buttons/ViewButton";
 import DeleteButton from "../../../components/Buttons/DeleteButton";
 import NewClassPage from "./register/NewClass";
+import UpdateClassPage from "./update/Update";
 import { useMemo, useState } from "react";
 import { useTurmaContext } from "../../../contexts/turma/TurmaContext";
 import { useAnoLectivoContext } from "../../../contexts/anoLectivo/AnoLectivoContext";
 import MainAPI from "../../../services/apis/MainAPI";
 
+type TurmaType = {
+    _id: String,
+    name: String,
+    anoLectivo: String,
+    desctription: String,
+}
+
+const initial = {
+    _id: '',
+    name: '',
+    anoLectivo: '',
+    desctription: '',
+}
+
+
 
 const TurmasPage = () => {
-    const [isNewClassModal, setIsNewClassModal] = useState(false);
+    const [isNewClassModal, setIsNewClassModal] = useState(false); // Abrir e feichar modal de criação
+    const [isUpdateClassModal, setUpdateClassModal] = useState(false); // Abrir e feichar modal de atualização
+    const [turma, setTurma] = useState<TurmaType>(initial)
 
-    const [turmas, setTurmas] = useTurmaContext(); // Contexto do componente Turma
+    const [turmas, setTurmas, findTurma] = useTurmaContext(); // Contexto do componente Turma
     const [anoLectivos] = useAnoLectivoContext(); // Contexto do componente Ano Lectivo
 
 
-    // 
+    // Function to open create modal
     const openNewClassModal = () => setIsNewClassModal(true)
-    // 
+    // Function to close create modal 
     const closeNewClassModal = () => setIsNewClassModal(false)
+
+    // Function to open update modal
+    const openUpdateClassModal = async (id: String) => {
+        const result = await findTurma(id);
+        setTurma(result);
+        setUpdateClassModal(true);
+    }
+    // Function to close update modal 
+    const closeUpdateClassModal = () => setUpdateClassModal(false)
 
     const rows: GridRowsProp = useMemo(() => (
         turmas.map(turma => (
@@ -60,17 +87,17 @@ const TurmasPage = () => {
             renderCell: (params) => (
                 <Stack spacing={1} direction={'row'}>
                     {/* Button to update file */}
-                    <EditButton />
+                    <EditButton onClick={() => openUpdateClassModal(params.row.id)} />
                     {/* Button to view file details */}
                     <ViewButton />
                     {/* Button to delete file */}
-                    <DeleteButton onClick={()=>handleDelete(params.row.id)} />
+                    <DeleteButton onClick={() => handleDelete(params.row.id)} />
                 </Stack>
             ),
         },
     ]
 
-      // Delete 
+    // Delete 
     const handleDelete = async (id: String) => {
         const response = await MainAPI.get(`turma/delete/${id}`)
         setTurmas(prev =>
@@ -106,12 +133,20 @@ const TurmasPage = () => {
                 />
             </div>
 
-            {/*  */}
+            {/* Modal to create class */}
             <Modal
                 open={isNewClassModal}
                 onClose={closeNewClassModal}
             >
                 <NewClassPage closeModal={closeNewClassModal} />
+            </Modal>
+
+            {/* Modal to update class */}
+            <Modal
+                open={isUpdateClassModal}
+                onClose={closeUpdateClassModal}
+            >
+                <UpdateClassPage closeModal={closeUpdateClassModal} turma={turma} />
             </Modal>
         </CustomContainer>
     )

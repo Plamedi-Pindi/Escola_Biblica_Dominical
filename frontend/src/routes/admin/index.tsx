@@ -24,7 +24,7 @@ const AdminRoutes = () => {
 
                     {/* Professores Routes */}
                     <Route path='/professores' element={<ProfessorPage />} />
-                    <Route path='/newProfesser' element={<NewProfessorPage />} />
+                    <Route path='/professores/newProfesser' element={<NewProfessorPage />} />
 
                     {/* Alunos Routes */}
                     <Route path='/alunos' element={<AlunosPage />} />
